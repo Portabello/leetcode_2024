@@ -36,7 +36,7 @@ Constraints:
 
 The number of the nodes in the list is in the range [0, 104].
 -105 <= Node.  val <= 105
-pos is -1 or a valid  index in the linked-list.
+pos is -1 or a valid   index in the linked-list.
 """
 # Definition for singly-linked list.
 # class ListNode:
