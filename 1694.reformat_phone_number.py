@@ -45,7 +45,7 @@ Step 3: There are 2 digits left, so put them in a single block of length 2. The 
 Joining the blocks gives "123-456-78".
  
 
-Constraints:
+Constraints: 
 
 2 <= number.length <= 100
 number consists of digits and the characters '-' and ' '.
