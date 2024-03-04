@@ -49,7 +49,7 @@ Constraints:
 
 2 <= number.length <= 100
 number consists of digits and the characters '-' and ' '.
-There are at least two digits in number.
+There are at least  two digits in number.
 """
 class Solution:
     def reformatNumber(self, number: str) -> str:
