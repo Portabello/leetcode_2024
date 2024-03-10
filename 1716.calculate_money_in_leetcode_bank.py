@@ -33,7 +33,7 @@ Constraints:
 
 1 <= n <= 1000
 """
-class Solution:
+class Solution: 
     def totalMoney(self, n: int) -> int:
         monday = 1
         t = 0
