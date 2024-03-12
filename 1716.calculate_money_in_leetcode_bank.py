@@ -34,7 +34,7 @@ Constraints:
 1 <= n <= 1000
 """
 class Solution: 
-    def totalMoney(self, n: int) -> int:
+    def totalMoney(self, n: int) -> int: 
         monday = 1
         t = 0
         cycle = 1
