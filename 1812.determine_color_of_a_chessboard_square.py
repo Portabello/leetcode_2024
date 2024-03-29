@@ -34,9 +34,9 @@ Output: false
 Constraints:
 
 coordinates.length == 2
-'a' <= coordinates[0] <= 'h'
+'a' <= coordinates[0] < = 'h'
 '1' <= coordinates[1] <= '8'
-"""
+""" 
 class Solution:
     def squareIsWhite(self, coordinates: str) -> bool:
         odd = "aceg"
