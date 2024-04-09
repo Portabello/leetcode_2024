@@ -25,7 +25,7 @@ Example 2:
 Input: s = "What is the solution to this problem", k = 4
 Output: "What is the solution"
 Explanation:
-The words in s are ["What", "is" "the", "solution", "to", "this", "problem"].
+The words in s are ["What" , "is" "the", "solution", "to", "this", "problem"].
 The first 4 word s are ["What", "is", "the", "solution"].
 Hence, you should return "What is the solution".
 Example 3:
