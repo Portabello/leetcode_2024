@@ -31,7 +31,7 @@ Hence, you should return "What is the solution".
 Example 3:
 
 Input: s =  "chopper is not a tanuki", k = 5
-Output: "chopper is not a tanuki"
+Output: "chopper is not a  tanuki"
  
 
 Constraints:
