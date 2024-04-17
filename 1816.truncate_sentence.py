@@ -38,7 +38,7 @@ Constraints:
 
 1 <= s.length <= 500
 k is in the range [1, the number of words in s].
-s consist of only lowercase and uppercase English letters and spaces.
+s consist of only lowe rcase and uppercase English letters and spaces.
 The words in s are separated by a single space.
 There are no leading or trailing spaces.
 """
