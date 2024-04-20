@@ -19,7 +19,7 @@ Output: "Hello how are you"
 Explanation:
 The words in s are ["Hello", "how" "are", "you", "Contestant"].
 The first 4 words are ["Hello", "how", "are", "you"].
-Hence, you should return "Hello how are you".
+Hence, you should  return "Hello how are you".
 Example 2:
 
 Input: s = "What is the solution to this problem", k = 4
