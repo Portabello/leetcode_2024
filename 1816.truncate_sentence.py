@@ -30,7 +30,7 @@ The first 4 word s are ["What", "is", "the", "solution"].
 Hence, you should return "What is the solution".
 Example 3:
 
-Input: s =  "chopper is not a tanuki", k = 5
+Input: s =  "chopper is not  a tanuki", k = 5
 Output: "chopper is not a  tanuki"
  
 
