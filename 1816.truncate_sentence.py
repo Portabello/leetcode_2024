@@ -14,7 +14,7 @@ You are given a sentence s​​​​​​ and an integer k​​​​​​.
 
 Example 1:
 
-Input: s = "Hello how are you Contestant", k = 4
+Input: s = "Hello how are you Con testant", k = 4
 Output: "Hello how are you"
 Explanation:
 The words in s are ["Hello", "how" "are", "you", "Contestant"].
