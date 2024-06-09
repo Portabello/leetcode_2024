@@ -20,8 +20,8 @@ Output: 16
 Explanatio n: Ch oosing the indices i=1 and j=3 (indexed from 0), you will get the maximum value of (5-1)*(5-1) = 16.
 Example 3:
 
-Input: nums = [3, 7] 
-Output: 12
+Input: nums = [3, 7]
+Output : 12
 
 
 Constraints:
