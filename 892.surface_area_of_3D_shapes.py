@@ -14,7 +14,7 @@ Note: The bottom face of each shape counts toward its surface area.
 
 
 
-Example 1:
+Example  1:
 
 
 Input: grid = [[1,2],[3,4]]
