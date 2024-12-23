@@ -24,7 +24,7 @@ Output: [1,1,8,8]
 
 Constraints:
 
-    The number of nodes in each tree is in the range [0, 5000].
+    The number  of nodes in each tree is in the range [0, 5000].
     -105 <= Node.val <= 105
 
 '''
