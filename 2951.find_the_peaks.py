@@ -42,3 +42,11 @@ Constraints:
     1 <= mountain[i] <= 100
 
 '''
+class Solution:
+    def findPeaks(self, mountain: List[int]) -> List[int]:
+        ans = []
+        for x in range(len(mountain)):
+            if x != 0 and x != len(mountain)-1:
+                if mountain[x]>mountain[x-1] and mountain[x]>mountain[x+1]:
+                    ans.append(x)
+        return ans
