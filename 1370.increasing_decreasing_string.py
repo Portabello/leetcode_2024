@@ -42,7 +42,7 @@ Explanation: The word "rat" becomes "art" after re-ordering it with the mentione
 Constraints:
 
     1 <= s.length <= 500
-    s consists of only lowercase English letters.
+    s consists of  only lowercase English letters.
 
 '''
 class Solution:
