@@ -88,4 +88,4 @@ class Solution:
                 index = None
                 found = False
 
-            print(ans)
+            
