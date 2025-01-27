@@ -52,25 +52,6 @@ Constraints:
 '''
 class Solution:
     def returnToBoundaryCount(self, nums: List[int]) -> int:
-        '''
-        cur = None
-        ans = 0
-        for x in nums:
-            #start
-            if cur == None:
-                cur = x
-            #if right of boundary
-            elif cur != None and cur > 0:
-                cur += x
-                if cur <= 0:
-                    ans += 1
-            #if left of boundary
-            elif cur != None and cur < 0:
-                cur += x
-                if cur >= 0:
-                    ans += 1
-        return ans
-        '''
         cur = None
         ans = 0
         for x in nums:
