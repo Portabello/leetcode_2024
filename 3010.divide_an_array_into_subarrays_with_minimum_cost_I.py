@@ -57,5 +57,4 @@ class Solution:
                 minone = nums[i]
             elif nums[i] <= mintwo:
                 mintwo = nums[i]
-        #print(minone, mintwo)
         return nums[0] + minone + mintwo
