@@ -81,7 +81,7 @@ class Solution:
                 increasing = 1
                 last = x
             largest_increasing = max(increasing, largest_increasing)
-        print(largest_increasing)
+        #print(largest_increasing)
 
         largest_decreasing = 0
         decreasing = 0
@@ -97,5 +97,5 @@ class Solution:
                 decreasing = 1
                 last = x
             largest_decreasing = max(decreasing, largest_decreasing)
-        print(largest_decreasing)
+        #print(largest_decreasing)
         return max(largest_decreasing, largest_increasing)
