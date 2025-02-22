@@ -52,7 +52,6 @@ class Solution:
     def maxDistance(self, colors: List[int]) -> int:
         hs = {}
         for i in range(len(colors)):
-            #print('-----')
             for j in range(i+1, len(colors)):
                 #print(colors[i], ':', colors[j])
                 if colors[i] != colors[j]:
@@ -69,4 +68,3 @@ class Solution:
             else:
                 furthest_house = max(hs[x], furthest_house)
         return furthest_house
-        
