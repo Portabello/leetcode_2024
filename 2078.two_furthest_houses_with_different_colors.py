@@ -60,7 +60,6 @@ class Solution:
                         hs[key] = max(j-i, hs[key])
                     else:
                         hs[key] = j-i
-        #print(hs)
         furthest_house = None
         for x in hs:
             if furthest_house == None:
