@@ -39,10 +39,8 @@ class Solution:
         l = 2
         ans = 0
         while l <= len(s):
-            #print('loop with len = ', l)
 
             for i in range(0, len(s)-l+1):
-                #print(s[i:i+l])
                 subs = s[i:i+l]
                 valid = True
                 #print(subs[0:int(len(subs)/2)], '    /     ',subs[int(len(subs)/2):])
