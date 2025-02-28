@@ -58,7 +58,6 @@ class Solution:
         k = (maxlen-len(k))*'0' + k
         ans = 0
         for i in range(len(n)):
-            #print(n[i], k[i])
             if n[i] == '0' and k[i] == '1':
                 return -1
             elif n[i] != k[i]:
