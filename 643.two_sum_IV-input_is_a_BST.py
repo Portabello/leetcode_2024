@@ -66,5 +66,4 @@ class Solution:
             if root.right:
                 traverse2(root.right)
         traverse2(root)
-
         return ans[0]
