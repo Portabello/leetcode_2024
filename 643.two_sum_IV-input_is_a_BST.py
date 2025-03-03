@@ -48,7 +48,6 @@ class Solution:
             if root.right:
                 traverse(root.right)
         traverse(root)
-        print(h)
         ans = [False]
         def traverse2(root):
             target = k - root.val
