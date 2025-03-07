@@ -51,6 +51,5 @@ class Solution:
                 z=nums[i+2]
             if x+z == y/2:
                 ans += 1
-                #print(x,y,z)
             #print(x,y,z)
         return ans
