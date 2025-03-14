@@ -51,6 +51,5 @@ class Solution:
         freq = dict(sorted(freq.items(), key=lambda item: item[1]))
         ans = ""
         for x in freq:
-            #print(x, freq[x])
             ans =  x*freq[x] + ans
         return ans
