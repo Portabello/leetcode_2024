@@ -71,7 +71,6 @@ Note: This question is the same as 2582: Pass the Pillow.
 class Solution:
     def numberOfChild(self, n: int, k: int) -> int:
         nums = [x for x in range(n)]
-        #print(nums)
         i, direction = 0, 'R'
         while k > 0:
 
