@@ -85,5 +85,4 @@ class Solution:
             elif direction == 'R':
                 i+=1
             k-=1
-            #print(k, nums, i)
         return nums[i]
