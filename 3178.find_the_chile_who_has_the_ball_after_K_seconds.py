@@ -73,7 +73,6 @@ class Solution:
         nums = [x for x in range(n)]
         i, direction = 0, 'R'
         while k > 0:
-
             if i == len(nums)-1:
                 direction = 'L'
                 i -= 1
