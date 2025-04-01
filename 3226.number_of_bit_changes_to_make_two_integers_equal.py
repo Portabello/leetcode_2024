@@ -43,7 +43,6 @@ Explanation:
 It is not possible to make n equal to k.
 
 
-
 Constraints:
 
     1 <= n, k <= 106
