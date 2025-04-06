@@ -23,7 +23,6 @@ Output: 2
 Explanation:
 Initially, the binary representations of n and k are n = (1101)2 and k = (0100)2.
 We can change the first and fourth bits of n. The resulting integer is n = (0100)2 = k.
-
 Example 2:
 
 Input: n = 21, k = 21
