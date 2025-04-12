@@ -22,7 +22,6 @@ Output: 6
 Explanation: The smallest multiple of both 6 and 2 is 6. Note that a number is a multiple of itself.
 
 
-
 Constraints:
 
     1 <= n <= 150
