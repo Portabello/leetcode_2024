@@ -7,7 +7,6 @@ Companies
 Hint
 Given a positive integer n, return the smallest positive integer that is a multiple of both 2 and n.
 
-
 Example 1:
 
 Input: n = 5
