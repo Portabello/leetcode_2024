@@ -31,7 +31,6 @@ Explanation:
 The digit product of 16 is 6, which is divisible by 3, making it the smallest number greater than or equal to 15 that satisfies the condition.
 
 
-
 Constraints:
 
     1 <= n <= 100
