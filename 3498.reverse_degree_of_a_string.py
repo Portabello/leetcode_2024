@@ -8,7 +8,6 @@ The reverse degree is calculated as follows:
 
 Return the reverse degree of s.
 
-
 Example 1:
 
 Input: s = "abc"
