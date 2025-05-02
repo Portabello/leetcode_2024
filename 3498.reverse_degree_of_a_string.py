@@ -11,7 +11,6 @@ Return the reverse degree of s.
 Example 1:
 
 Input: s = "abc"
-
 Output: 148
 
 Explanation:
