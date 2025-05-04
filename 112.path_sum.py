@@ -8,7 +8,7 @@ Given the root of a binary tree and an integer targetSum, return true if the tre
 
 A leaf is a node with no children.
 
- 
+
 
 Example 1:
 
@@ -30,7 +30,7 @@ Example 3:
 Input: root = [], targetSum = 0
 Output: false
 Explanation: Since the tree is empty, there are no root-to-leaf paths.
- 
+
 
 Constraints:
 
@@ -44,19 +44,27 @@ The number of nodes in the tree is in the range [0, 5000].
 #         self.val = val
 #         self.left = left
 #         self.right = right
-ans = False
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
-        global ans
-        ans = False
-        self.r_f(root, 0, targetSum)
-        return ans
-    def r_f(self, root, sum, targetSum):
-        global ans
-        if root:
-            sum += root.val
-            if sum == targetSum and root.left == None and root.right == None:
-                print("sum found!")
-                ans = True
-            self.r_f(root.left, sum, targetSum)
-            self.r_f(root.right, sum, targetSum)
+        ans = [False]
+        def rec(node, cursum):
+
+            if not node:
+                return
+            newsum = cursum + node.val
+            print(node.val, cursum)
+            if not node.left and not node.right and newsum == targetSum:
+                ans[0] = True
+            if node.left:
+                rec(node.left, newsum)
+
+            if node.right:
+                rec(node.right, newsum)
+        rec(root, 0)
+        return ans[0]
