@@ -58,7 +58,6 @@ The strictly decreasing subarrays of nums are [3], [2], [1], [3,2], [2,1], and [
 Hence, we return 3.
 
 
-
 Constraints:
 
     1 <= nums.length <= 50
