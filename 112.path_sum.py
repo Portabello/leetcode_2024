@@ -31,7 +31,6 @@ Input: root = [], targetSum = 0
 Output: false
 Explanation: Since the tree is empty, there are no root-to-leaf paths.
 
-
 Constraints:
 
 The number of nodes in the tree is in the range [0, 5000].
