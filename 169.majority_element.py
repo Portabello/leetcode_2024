@@ -19,7 +19,6 @@ Output: 2
 
 Constraints:
 
-
 n == nums.length
 1 <= n <= 5 * 104
 -109 <= nums[i] <= 109
