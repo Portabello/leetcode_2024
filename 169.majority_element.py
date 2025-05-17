@@ -23,7 +23,6 @@ n == nums.length
 1 <= n <= 5 * 104
 -109 <= nums[i] <= 109
 
-
 Follow-up: Could you solve the problem in linear time and in O(1) space?
 """
 class Solution:
