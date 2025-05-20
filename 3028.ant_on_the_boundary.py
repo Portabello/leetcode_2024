@@ -20,7 +20,6 @@ Notes:
     There is an infinite space on both sides of the boundary.
     We check whether the ant is on the boundary only after it has moved |nums[i]| units. In other words, if the ant crosses the boundary during its movement, it does not count.
 
-
 Example 1:
 
 Input: nums = [2,3,-5]
