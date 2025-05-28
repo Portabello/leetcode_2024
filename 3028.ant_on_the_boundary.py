@@ -22,6 +22,7 @@ Notes:
 
 Example 1:
 
+
 Input: nums = [2,3,-5]
 Output: 1
 Explanation: After the first step, the ant is 2 steps to the right of the boundary.
