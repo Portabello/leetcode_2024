@@ -8,7 +8,7 @@ You are given a large integer represented as an integer array digits, where each
 
 Increment the large integer by one and return the resulting array of digits.
 
- 
+
 
 Example 1:
 
@@ -31,7 +31,7 @@ Output: [1,0]
 Explanation: The array represents the integer 9.
 Incrementing by one gives 9 + 1 = 10.
 Thus, the result should be [1,0].
- 
+
 
 Constraints:
 
@@ -42,23 +42,12 @@ digits does not contain any leading 0's.
 """
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
-        digitsInt = self.ListToInt(digits)
-        print(digitsInt)
-        digitsIntIncremented = digitsInt + 1
-        print(digitsIntIncremented)
-        ans =  self.IntToList(digitsIntIncremented)
-        print(ans)
-        return ans
-    def ListToInt(self, list):
-        ans = 0
-        mod = 1
-        for x in reversed(list):
-            ans += mod*x
-            mod = mod*10
-        return ans
-    def IntToList(self, input):
+        pwr = 1
+        plus_one=1
+        for i in range(len(digits)-1, -1, -1):
+            plus_one += digits[i]*pwr
+            pwr *= 10
         ans = []
-        for x in str(input):
+        for x in str(plus_one):
             ans.append(int(x))
         return ans
-
