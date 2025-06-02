@@ -39,10 +39,12 @@ Constraints:
 '''
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        y = []
+        hs = {}
         for x in nums:
-            if x in y:
-                y.remove(x)
+            if x in hs:
+                del hs[x]
             else:
-                y.append(x)
-        return y[0]
+                hs[x]=1
+        #print(hs)
+        for x in hs:
+            return x
