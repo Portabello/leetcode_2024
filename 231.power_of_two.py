@@ -8,7 +8,7 @@ Given an integer n, return true if it is a power of two. Otherwise, return false
 
 An integer n is a power of two, if there exists an integer x such that n == 2x.
 
- 
+
 
 Example 1:
 
@@ -24,22 +24,21 @@ Example 3:
 
 Input: n = 3
 Output: false
- 
+
 
 Constraints:
 
 -231 <= n <= 231 - 1
- 
+
 
 Follow up: Could you solve it without loops/recursion?
 """
 class Solution:
     def isPowerOfTwo(self, n: int) -> bool:
-        x = 0
-        while True:
-            j = pow(2,x)
-            if(j == n):
+        for x in range(0,n):
+            #print(x, 2**x)
+            if 2**x == n:
                 return True
-            if(j > n):
+            if 2**x > n:
                 return False
-            x += 1
+        return False
