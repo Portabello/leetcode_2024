@@ -8,7 +8,7 @@ Given an integer array nums, move all 0's to the end of it while maintaining the
 
 Note that you must do this in-place without making a copy of the array.
 
- 
+
 
 Example 1:
 
@@ -18,7 +18,7 @@ Example 2:
 
 Input: nums = [0]
 Output: [0]
- 
+
 
 Constraints:
 
@@ -30,14 +30,30 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        iteration = len(nums)
-        index = 0
-        while iteration>0:
-            if(nums[index]==0):
-                nums.pop(index)
-                nums.append(0)
-                #index += 1
-                iteration-=1
-            else:
-                index += 1
-                iteration-=1
+        def movezero(i,n):
+            #print('moving zero@', i, 'to', n)
+            #print('before')
+            #print(nums)
+            for x in range(i,n):
+                #print()
+                t = nums[x+1]
+                nums[x+1] = nums[x]
+                nums[x] = t
+            #print('after')
+            #print(nums)
+            #print('........')
+
+        n = len(nums)-1
+        while True:
+            zerofound = False
+            #print('exploring 0 to',n, nums)
+            for i in range(0,n):
+                if nums[i]==0:
+                    zerofound = True
+                    #print('found @', i, nums[i])
+                    movezero(i,n)
+                    n -= 1
+                    break
+            if zerofound == False:
+                #print('exiting')
+                break
