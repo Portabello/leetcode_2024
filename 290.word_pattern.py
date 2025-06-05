@@ -8,7 +8,7 @@ Given a pattern and a string s, find if s follows the same pattern.
 
 Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in s.
 
- 
+
 
 Example 1:
 
@@ -22,7 +22,7 @@ Example 3:
 
 Input: pattern = "aaaa", s = "dog cat cat dog"
 Output: false
- 
+
 
 Constraints:
 
@@ -35,19 +35,20 @@ All the words in s are separated by a single space.
 """
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
-        hash_table = {}
-        s_list = s.split()
-        if len(s_list) != len(pattern):
+        s=s.split()
+        pattern = list(pattern)
+        #print(s,pattern)
+        if len(s) != len(pattern):
             return False
-        for i,x in enumerate(pattern):
-            print(x, s_list[i])
-            if x in hash_table:
-                #check if its the same
-                if(hash_table[x] != s_list[i]):
+        hs = {}
+        for i in range(len(pattern)):
+            #print(s[i],pattern[i])
+            if pattern[i] in hs:
+                if hs[pattern[i]] != s[i]:
                     return False
             else:
-                #make sure its not duplicate
-                if s_list[i] in hash_table.values():
+                if s[i] in hs.values():
                     return False
-                hash_table[x] = s_list[i]
+                else:
+                    hs[pattern[i]] = s[i]
         return True
