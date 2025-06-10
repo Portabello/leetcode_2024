@@ -8,7 +8,7 @@ Given the root of a binary tree, return the sum of all left leaves.
 
 A leaf is a node with no children. A left leaf is a leaf that is the left child of another node.
 
- 
+
 
 Example 1:
 
@@ -20,7 +20,7 @@ Example 2:
 
 Input: root = [1]
 Output: 0
- 
+
 
 Constraints:
 
@@ -33,26 +33,23 @@ The number of nodes in the tree is in the range [1, 1000].
 #         self.val = val
 #         self.left = left
 #         self.right = right
-ansx = 0
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
-        global ansx
-        ansx=0
-        if root.right:
-            self.r_f(root.right, 0)
-        if root.left:
-            self.r_f(root.left, 1)
-        if not root.right and not root.left:
-            return 0
-        return ansx
-    def r_f(self, root, type):
-        global ansx
-        print("in node", root.val)
-        if type==1 and not root.right and not root.left:
-            print("end_ndoe-found", root)
-            ansx += root.val
-            return 0
-        if root.right:
-            self.r_f(root.right, 0)
-        if root.left:
-            self.r_f(root.left, 1)
+        ans = [0]
+
+        def rs(node, is_left):
+            if is_left and not node.left and not node.right:
+                ans[0] = ans[0] + node.val
+                #print('appending ', node.val, 'to ans[0]=',ans[0])
+            if node.left:
+                rs(node.left, True)
+            if node.right:
+                rs(node.right, False)
+        rs(root, False)
+        return ans[0]
