@@ -51,21 +51,28 @@ The number of nodes in the tree is in the range [0, 5000].
 #         self.val = val
 #         self.left = left
 #         self.right = right
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         ans = [False]
-        def rec(node, cursum):
-
+        def rc(node,cursum):
             if not node:
                 return
             newsum = cursum + node.val
-            print(node.val, cursum)
-            if not node.left and not node.right and newsum == targetSum:
-                ans[0] = True
-            if node.left:
-                rec(node.left, newsum)
-
-            if node.right:
-                rec(node.right, newsum)
-        rec(root, 0)
+            #print('at node ',node.val, ' cursum is ', newsum)
+            if not node.left and not node.right:
+                #leaf node
+                if newsum == targetSum:
+                    ans[0] = True
+            else:
+                if node.left:
+                    rc(node.left, newsum)
+                if node.right:
+                    rc(node.right, newsum)
+        rc(root,0)
         return ans[0]
