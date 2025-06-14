@@ -28,14 +28,12 @@ Follow-up: Could you solve the problem in linear time and in O(1) space?
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
         hs = {}
+        majority_frequency =  len(nums)//2
         for x in nums:
             if x in hs:
                 hs[x] += 1
             else:
-                hs[x] = 1
-        majority_breakpoint = (len(nums)//2 ) + 1
-        print(majority_breakpoint)
-        for x in hs:
-            if hs[x] >= majority_breakpoint:
-                return x
+                hs[x]=1
+            if hs[x] > majority_frequency:
+                    return x
         return -1
