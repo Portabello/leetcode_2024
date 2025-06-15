@@ -37,17 +37,16 @@ n == mat[i].length
 '''
 class Solution:
     def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
-        t = []
+        new_mat = []
+        mat_t = []
         for x in mat:
             for y in x:
-                t.append(y)
-        if len(t) != (r*c):
+                mat_t.append(y)
+        #validate reshape is possible
+        if len(mat_t) != r*c:
             return mat
-
-        ans = []
-        for x in range(0,r):
-            ans.append(t[0:c])
-            t = t[c:]
-            print(ans)
-        #print(ans)
-        return ans
+        for i in range(r):
+            new_mat.append([])
+            for j in range(c):
+                new_mat[i].append(mat_t.pop(0))
+        return new_mat
