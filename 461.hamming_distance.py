@@ -8,7 +8,7 @@ The Hamming distance between two integers is the number of positions at which th
 
 Given two integers x and y, return the Hamming distance between them.
 
- 
+
 
 Example 1:
 
@@ -23,7 +23,7 @@ Example 2:
 
 Input: x = 3, y = 1
 Output: 1
- 
+
 
 Constraints:
 
@@ -31,17 +31,20 @@ Constraints:
 """
 class Solution:
     def hammingDistance(self, x: int, y: int) -> int:
-        b_x = str(bin(x)[2:])
-        b_y = str(bin(y)[2:])
-        if(len(b_x) > len(b_y)):
-            pad_l = len(b_x) - len(b_y) 
-            b_y = pad_l*"0" + str(b_y)
-        elif(len(b_y) > len(b_x)):
-            pad_l = len(b_y) - len(b_x) 
-            b_x = pad_l*"0" + str(b_x)
+        x_b,y_b = bin(x)[2:], bin(y)[2:]
+        def pad_zeros(x,y):
+            xlen,ylen = len(x),len(y)
+            maxlen = max(xlen,ylen)
+            if xlen!=maxlen:
+                pad = maxlen-xlen
+                x = pad*'0' + x
+            if ylen!=maxlen:
+                pad = maxlen-ylen
+                y = pad*'0' + y
+            return x,y
+        x_b,y_b = pad_zeros(x_b,y_b)
         hamming_distance = 0
-        for i,c in enumerate(b_x):
-            if c != b_y[i]:
+        for i in range(len(x_b)):
+            if x_b[i] != y_b[i]:
                 hamming_distance += 1
         return hamming_distance
-
