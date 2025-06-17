@@ -7,7 +7,7 @@ Companies
 Hint
 Given an array nums of n integers where nums[i] is in the range [1, n], return an array of all the integers in the range [1, n] that do not appear in nums.
 
- 
+
 
 Example 1:
 
@@ -17,37 +17,24 @@ Example 2:
 
 Input: nums = [1,1]
 Output: [2]
- 
+
 
 Constraints:
 
 n == nums.length
 1 <= n <= 105
 1 <= nums[i] <= n
- 
+
 
 Follow up: Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.
 """
 class Solution:
     def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
-        n = len(nums)
-        setx = set()
+        hs = {}
         for x in nums:
-            setx.add(x)
+            hs[x] = 1
         ans = []
-        for x in range(n):
-            if x+1 not in setx:
-                ans.append(x+1)
+        for i in range(len(nums)):
+            if (i+1) not in hs:
+                ans.append(i+1)
         return ans
-        
-        
-        
-        """
-        n = len(nums)
-        arr = [x+1 for x in range(n)]
-        #print(arr)
-        for x in nums:
-            if x in arr:
-                arr.remove(x)
-        return arr
-        """
