@@ -39,12 +39,7 @@ Constraints:
 '''
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        hs = {}
+        t = 0
         for x in nums:
-            if x in hs:
-                del hs[x]
-            else:
-                hs[x]=1
-        #print(hs)
-        for x in hs:
-            return x
+            t = t^x
+        return t
