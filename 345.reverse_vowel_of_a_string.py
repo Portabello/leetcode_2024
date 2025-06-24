@@ -8,7 +8,7 @@ Given a string s, reverse only all the vowels in the string and return it.
 
 The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once.
 
- 
+
 
 Example 1:
 
@@ -18,7 +18,7 @@ Example 2:
 
 Input: s = "leetcode"
 Output: "leotcede"
- 
+
 
 Constraints:
 
@@ -27,15 +27,13 @@ s consist of printable ASCII characters.
 """
 class Solution:
     def reverseVowels(self, s: str) -> str:
-        vowel_list = []
-        for c in s:
-            if(c == 'a' or c == 'e' or c == 'i' or c == 'o' or c == 'u' or c == 'A' or c == 'E' or c == 'I' or c == 'O' or c == 'U' ):
-                vowel_list.append(c)
-        ans = ""
-        for c in s:
-            if(c == 'a' or c == 'e' or c == 'i' or c == 'o' or c == 'u' or c == 'A' or c == 'E' or c == 'I' or c == 'O' or c == 'U' ):
-                ans += vowel_list[-1]
-                vowel_list.pop()
-            else:
-                ans += c
-        return ans
+        vowels = ['a','e','i','o','u','A','E','I','O','U']
+        t = []
+        s = list(s)
+        for x in s:
+            if x in vowels:
+                t.append(x)
+        for i,x in enumerate(s):
+            if x in vowels:
+                s[i] = t.pop()
+        return "".join(s)
