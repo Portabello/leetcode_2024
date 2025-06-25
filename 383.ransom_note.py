@@ -8,7 +8,7 @@ Given two strings ransomNote and magazine, return true if ransomNote can be cons
 
 Each letter in magazine can only be used once in ransomNote.
 
- 
+
 
 Example 1:
 
@@ -22,19 +22,27 @@ Example 3:
 
 Input: ransomNote = "aa", magazine = "aab"
 Output: true
- 
+
 
 Constraints:
 
 1 <= ransomNote.length, magazine.length <= 105
 ransomNote and magazine consist of lowercase English letters.
 """
-import re
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        hs = {}
+        for x in magazine:
+            if x not in hs:
+                hs[x] = 1
+            else:
+                hs[x] += 1
         for x in ransomNote:
-            if x in magazine:
-                magazine = re.sub(x,"",magazine,1)
+            if x in hs:
+                if hs[x] == 0:
+                    return False
+                else:
+                    hs[x] -= 1
             else:
                 return False
         return True
