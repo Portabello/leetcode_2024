@@ -31,11 +31,10 @@ Follow up: Suppose there are lots of incoming s, say s1, s2, ..., sk where k >= 
 """
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
-        for i in range(0,len(t)):
-            if len(s) == 0:
-                break
-            if t[i] == s[0]:
-                s=s[1:]
-        if len(s) == 0:
+        for i in range(len(t)):
+            if len(s)!=0:
+                if t[i] == s[0]:
+                    s=s[1:]
+        if len(s)==0:
             return True
         return False
