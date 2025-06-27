@@ -39,7 +39,7 @@ class Solution:
         while l<=r:
             m = (l+r)//2
             cur = 2**m
-            print(l,m,r, cur)
+            #print(l,m,r, cur)
 
             if cur == n:
                 return True

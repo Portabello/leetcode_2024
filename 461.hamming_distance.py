@@ -31,20 +31,17 @@ Constraints:
 """
 class Solution:
     def hammingDistance(self, x: int, y: int) -> int:
-        x_b,y_b = bin(x)[2:], bin(y)[2:]
+        x,y = bin(x)[2:], bin(y)[2:]
         def pad_zeros(x,y):
-            xlen,ylen = len(x),len(y)
-            maxlen = max(xlen,ylen)
-            if xlen!=maxlen:
-                pad = maxlen-xlen
-                x = pad*'0' + x
-            if ylen!=maxlen:
-                pad = maxlen-ylen
-                y = pad*'0' + y
+            maxlen = max(len(x), len(y))
+            if len(x)!=maxlen:
+                x = (maxlen-len(x))*'0' + x
+            else:
+                y = (maxlen-len(y))*'0' + y
             return x,y
-        x_b,y_b = pad_zeros(x_b,y_b)
+        x,y = pad_zeros(x,y)
         hamming_distance = 0
-        for i in range(len(x_b)):
-            if x_b[i] != y_b[i]:
+        for i in range(len(x)):
+            if x[i]!=y[i]:
                 hamming_distance += 1
         return hamming_distance

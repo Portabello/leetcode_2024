@@ -10,7 +10,7 @@ All the letters in the answer string should be lowercase characters, and there s
 
 Note: You are not allowed to use any built-in library method to directly solve this problem.
 
- 
+
 
 Example 1:
 
@@ -20,7 +20,7 @@ Example 2:
 
 Input: num = -1
 Output: "ffffffff"
- 
+
 
 Constraints:
 
@@ -28,16 +28,18 @@ Constraints:
 """
 class Solution:
     def toHex(self, num: int) -> str:
-        if num == 0:
-            return '0'
-        if num < 0:
-            num = (1 << 32) + num
-        print(num)
-        hexnum = ""
-        hexdigits = "0123456789abcdef"
-        while(num>0):
-            print(num)
-            tmp = int(num%16)
-            num = int(num/16)
-            hexnum = hexdigits[tmp] + hexnum
-        return hexnum
+        ans = ''
+        hs = {10:'a',11:'b',12:'c',13:'d',14:'e',15:'f'}
+        if num <0:
+            num = (2**32)+num
+        if num==0:
+            return "0"
+        #print(num)
+        while num != 0:
+            t = num % 16
+            if t>9:
+                t=hs[t]
+            ans = str(t) + ans
+            #print(t)
+            num = num//16
+        return ans
