@@ -38,22 +38,17 @@ All the values in score are unique.
 '''
 class Solution:
     def findRelativeRanks(self, score: List[int]) -> List[str]:
-        sorted_scores = score.copy()
-        sorted_scores.sort()
-        sorted_scores.reverse()
-        #print(score)
-        #print(sorted_scores)
-        placement = {}
-        for i,x in enumerate(sorted_scores):
-            if i+1==1:
-                placement[x] = "Gold Medal"
-            elif i+1 == 2:
-                placement[x] = "Silver Medal"
-            elif i+1 == 3:
-                placement[x] = "Bronze Medal"
+        sorted_score = score[:]
+        sorted_score.sort()
+        sorted_score.reverse()
+        for i,x in enumerate(score):
+            sorted_index = sorted_score.index(x)
+            if sorted_index == 0:
+                score[i] = 'Gold Medal'
+            elif sorted_index == 1:
+                score[i] = 'Silver Medal'
+            elif sorted_index == 2:
+                score[i] = 'Bronze Medal'
             else:
-                placement[x] = str(i+1)
-        ans = []
-        for x in score:
-            ans.append(placement[x])
-        return ans
+                score[i] = str(sorted_index+1)
+        return score
