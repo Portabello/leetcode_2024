@@ -8,7 +8,7 @@ Given the root of a binary tree, return all root-to-leaf paths in any order.
 
 A leaf is a node with no children.
 
- 
+
 
 Example 1:
 
@@ -19,7 +19,7 @@ Example 2:
 
 Input: root = [1]
 Output: ["1"]
- 
+
 
 Constraints:
 
@@ -35,14 +35,12 @@ The number of nodes in the tree is in the range [1, 100].
 class Solution:
     def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
         ans = []
-        def r_f(root, s):
-            s+=str(root.val)
-            if not root.right and not root.left:
-                ans.append(s)
-                return
-            if root.right:
-                r_f(root.right, s+"->")
-            if root.left:
-                r_f(root.left, s+"->")
-        r_f(root, "")
+        def traverse(node, cur_path):
+            if not node.left and not node.right:
+                ans.append(cur_path+str(node.val))
+            if node.left:
+                traverse(node.left, cur_path+str(node.val)+'->')
+            if node.right:
+                traverse(node.right, cur_path+str(node.val)+'->')
+        traverse(root, "")
         return ans

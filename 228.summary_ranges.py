@@ -14,7 +14,7 @@ Each range [a,b] in the list should be output as:
 
 "a->b" if a != b
 "a" if a == b
- 
+
 
 Example 1:
 
@@ -33,7 +33,7 @@ Explanation: The ranges are:
 [2,4] --> "2->4"
 [6,6] --> "6"
 [8,9] --> "8->9"
- 
+
 
 Constraints:
 
@@ -45,25 +45,21 @@ nums is sorted in ascending order.
 class Solution:
     def summaryRanges(self, nums: List[int]) -> List[str]:
         ans = []
-        t_ans = []
-        if not nums:
+        t = ""
+        if len(nums)==0:
             return []
-        for x in nums:
-            if not t_ans:
-                t_ans = [x]
+        for i in range(len(nums)):
+            if len(t) == 0:
+                t = str(nums[i])
+            elif nums[i] == (nums[i-1]+1):
+                if t[-1]!='>':
+                    t = t + '->'
             else:
-                if t_ans[-1]+1 == x:
-                    t_ans.append(x)
-                else:
-                    #add string version to ans
-                    if len(t_ans)==1:
-                        ans.append(str(t_ans[0]))
-                    else:
-                        ans.append(str(t_ans[0])+"->"+str(t_ans[-1]))
-                    #restart t_ans
-                    t_ans = [x]
-        if len(t_ans)==1:
-            ans.append(str(t_ans[0]))
-        else:
-            ans.append(str(t_ans[0])+"->"+str(t_ans[-1]))
+                if t[-1]=='>':
+                    t = t + str(nums[i-1])
+                ans.append(t)
+                t = str(nums[i])
+        if t[-1]=='>':
+            t = t + str(nums[-1])
+        ans.append(t)
         return ans
