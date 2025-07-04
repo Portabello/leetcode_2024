@@ -8,7 +8,7 @@ Given the roots of two binary trees p and q, write a function to check if they a
 
 Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
 
- 
+
 
 Example 1:
 
@@ -25,7 +25,7 @@ Example 3:
 
 Input: p = [1,2,1], q = [1,1,2]
 Output: false
- 
+
 
 Constraints:
 
@@ -40,29 +40,20 @@ The number of nodes in both trees is in the range [0, 100].
 #         self.right = right
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        if p:
-            p_bfs = self.bfs(p)
-        else:
-            p_bfs = []
-        if q:
-            q_bfs = self.bfs(q)
-        else:
-            q_bfs = []
+        t = []
+        def traverse(node):
+            if not node:
+                t.append(None)
+                return
+            t.append(node.val)
 
-        print("p: ", p)
-        print("q: ", q)
-        if(p_bfs == q_bfs):
-            return True
-        return False
-    def bfs(self, tree):
-        ans = []
-        ans.append(tree.val)
-        if tree.left:
-            ans.append(self.bfs(tree.left))
-        else:
-            ans.append("null")
-        if tree.right:
-            ans.append(self.bfs(tree.right))
-        else:
-            ans.append("null")
-        return ans
+            traverse(node.left)
+            traverse(node.right)
+        traverse(p)
+        p_tree = t[:]
+        t = []
+        traverse(q)
+        q_tree = t[:]
+        #print(p_tree)
+        #print(q_tree)
+        return p_tree == q_tree
