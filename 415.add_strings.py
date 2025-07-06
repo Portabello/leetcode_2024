@@ -27,35 +27,25 @@ num1 and num2 don't have any leading zeros except for the zero itself.
 '''
 class Solution:
     def addStrings(self, num1: str, num2: str) -> str:
-        sum = ""
-        carry = 0
+        hs = {'1':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '0':0}
+        ans, carry = "",0
         while num1 or num2:
-            if len(num1) == 0 and len(num2) != 0:
-                t=str(int(num2[-1])+ carry)
-                carry = 0
-                if int(t)>=10:
-                    carry = 1
-                    t = str(int(t)-10)
-                sum = t + sum
-                num2=num2[:-1]
-            elif len(num2) == 0 and len(num1) != 0:
-                t=str(int(num1[-1])+ carry)
-                carry = 0
-                if int(t)>=10:
-                    carry = 1
-                    t = str(int(t)-10)
-                sum = t + sum
-                num1=num1[:-1]
-            else:
-                t=str(int(num1[-1])+int(num2[-1])+ carry)
-                carry = 0
-                if int(t)>=10:
-                    carry = 1
-                    t = str(int(t)-10)
-                sum = t + sum
-                num1=num1[:-1]
-                num2=num2[:-1]
-        print(sum)
-        if carry == 1:
-            return "1"+sum
-        return sum
+            if num1 and num2:
+                t = hs[num1[-1]] + hs[num2[-1]] + carry
+                carry = t//10
+                ans = str(t%10) + ans
+                num1 = num1[:-1]
+                num2 = num2[:-1]
+            elif num1 and not num2:
+                t = hs[num1[-1]] + carry
+                carry = t//10
+                ans = str(t%10) + ans
+                num1 = num1[:-1]
+            elif num2 and not num1:
+                t = hs[num2[-1]] + carry
+                carry = t//10
+                ans = str(t%10) + ans
+                num2 = num2[:-1]
+        if carry != 0:
+            ans = str(carry)+ans
+        return ans

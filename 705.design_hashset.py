@@ -41,19 +41,18 @@ At most 104 calls will be made to add, remove, and contains.
 class MyHashSet:
 
     def __init__(self):
-        self.hashset = set()
+        self.hs=[]
 
     def add(self, key: int) -> None:
-        self.hashset.add(key)
+        if key not in self.hs:
+            self.hs.append(key)
 
     def remove(self, key: int) -> None:
-        if key in self.hashset:
-            self.hashset.remove(key)
+        if key in self.hs:
+            self.hs.remove(key)
 
     def contains(self, key: int) -> bool:
-        if key in self.hashset:
-            return True
-        return False
+        return key in self.hs
 
 
 # Your MyHashSet object will be instantiated and called as such:

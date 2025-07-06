@@ -33,28 +33,15 @@ The number of nodes in the tree is in the range [1, 1000].
 #         self.val = val
 #         self.left = left
 #         self.right = right
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
 class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
-        sum = [0]
-        def rc(node, isLeft):
-            if not node.left and not node.right and isLeft:
-                print('adding', node.val)
-                sum[0] += node.val
+        ans = [0]
+        def traverse(node, left):
+            if not node.left and not node.right and left:
+                ans[0] += node.val
             if node.left:
-                rc(node.left, True)
+                traverse(node.left, True)
             if node.right:
-                rc(node.right, False)
-        rc(root, False)
-        return sum[0]
+                traverse(node.right, False)
+        traverse(root, False)
+        return ans[0]
