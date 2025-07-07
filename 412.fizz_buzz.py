@@ -40,13 +40,14 @@ Constraints:
 class Solution:
     def fizzBuzz(self, n: int) -> List[str]:
         ans = []
-        for x in range(1,n+1):
-            if x%3 == 0 and x%5 == 0:
-                ans.append("FizzBuzz")
-            elif x%3 == 0:
-                ans.append("Fizz")
-            elif x%5 == 0:
-                ans.append("Buzz")
+        for x in range(n):
+            fizz, buzz = (x+1)%3, (x+1)%5
+            if not fizz and not buzz:
+                ans.append('FizzBuzz')
+            elif fizz and not buzz:
+                ans.append('Buzz')
+            elif buzz and not fizz:
+                ans.append('Fizz')
             else:
-                ans.append(str(x))
+                ans.append(str(x+1))
         return ans

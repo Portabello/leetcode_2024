@@ -36,16 +36,14 @@ Constraints:
 '''
 class Solution:
     def longestPalindrome(self, s: str) -> int:
-        table = {}
-        for c in s:
-            if c in table:
-                table[c] += 1
+        length = 0
+        t = []
+        for x in s:
+            if x in t:
+                t.remove(x)
+                length += 2
             else:
-                table[c] = 1
-        ans = 0
-        extra = 0
-        for x in table:
-            if extra == 0 and table[x]%2==1:
-                extra = 1
-            ans += int(table[x]/2) * 2
-        return ans + extra
+                t.append(x)
+        if length < len(s):
+            length+=1
+        return length
