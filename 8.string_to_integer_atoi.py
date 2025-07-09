@@ -17,7 +17,7 @@ Note:
 
 Only the space character ' ' is considered a whitespace character.
 Do not ignore any characters other than the leading whitespace or the rest of the string after the digits.
- 
+
 
 Example 1:
 
@@ -58,33 +58,38 @@ Step 3: "4193 with words" ("4193" is read in; reading stops because the next cha
              ^
 The parsed integer is 4193.
 Since 4193 is in the rang e [-231, 231 - 1], the final result is 4193.
- 
+
 """
 class Solution:
     def myAtoi(self, s: str) -> int:
         negative = False
-        ans = ""
-        number = "0123456789"
-        nondigit = ".abcdefghijklmnopqrstuvwxyz"
+        value = ""
+        digitfound = False
         for c in s:
-            if c in nondigit:
-                break
-            if c == " ":
-                continue
-            elif c == "-":
-                negative = True
-            elif c in number:
-                if c == "0" and int(ans) == 0:
+            if c != ' ':
+                if c == '-' and digitfound == False:
+                    digitfound = True
+                    #print('negative found')
+                    negative = True
+                elif c=='+' and digitfound == False:
+                    digitfound = True
                     continue
-                else:
-                    ans = ans + c
-        print(ans)
-        if len(ans) == 0:
+                elif not c.isdigit():
+                    #print('breaking')
+                    break
+                elif c.isdigit():
+                    #print('appending digit ', c)
+                    digitfound = True
+                    value = value + c
+            elif digitfound:
+                break
+        if len(value)==0:
             return 0
-        if negative == True:
-            if -int(ans) < -2**31:
-                return -2**31
-            return -int(ans)
-        if int(ans) > (2**31)-1:
-            return (2**31)-1
-        return int(ans)
+        if negative:
+            if int(value) > 2147483648:
+                return -2147483648
+            else:
+                return -int(value)
+        if int(value) > 2147483647:
+            return 2147483647
+        return int(value)

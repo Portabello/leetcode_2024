@@ -35,19 +35,14 @@ Constraints:
 #         self.next = next
 class Solution:
     def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        oghead = head
-        if not head:
-            return None
-        while True:
-            if head.next:
-                if head.val == head.next.val:
-                    if head.next.next:
-                        head.next =  head.next.next
-                    else:
-                        head.next = None
-                        break
+        cur = head
+
+        while cur:
+            if cur.next:
+                if cur.val == cur.next.val:
+                    cur.next = cur.next.next
                 else:
-                    head = head.next
+                    cur = cur.next
             else:
-                break
-        return oghead
+                cur = cur.next
+        return head
