@@ -58,34 +58,42 @@ Constraints:
 '''
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        #check rows
-        for r in board:
-            t = set()
-            for x in r:
-                if x!='.':
-                    if x in t:
+        def check_sub_box_valid(x,y,board):
+            already_seen = []
+            for i in range(x,x+3):
+                for j in range(y,y+3):
+                    if board[i][j] in already_seen and board[i][j] != ".":
                         return False
-                    t.add(x)
-        #check columns
-        for i in range(9):
-            t = set()
+                    already_seen.append(board[i][j])
+            return True
+        def check_column_valid(j,board):
+            already_seen = []
+            for i in range(9):
+                if board[i][j] in already_seen and board[i][j] != ".":
+                    return False
+                already_seen.append(board[i][j])
+            return True
+        def check_row_valid(i,board):
+            already_seen = []
             for j in range(9):
-                e = board[j][i]
-                if e!='.':
-                    if e in t:
-                        return False
-                    t.add(e)
-        #check 3x3 grids
-        thirds = [[0,0],[0,3],[0,6],[3,0],[3,3],[3,6],[6,0],[6,3],[6,6]]
-        for x in thirds:
-            #print('====================')
-            t = set()
-            for i in range(x[0],x[0]+3):
-                for j in range(x[1],x[1]+3):
-                    #print(e)
-                    e = board[i][j]
-                    if e!='.':
-                        if e in t:
-                            return False
-                        t.add(e)
+                if board[i][j] in already_seen and board[i][j] != ".":
+                    return False
+                already_seen.append(board[i][j])
+            return True
+        sub_box_origins = [[0,0], [0,3], [0,6], [3,0], [3,3], [3,6], [6,0], [6,3], [6,6]]
+        #check columns
+        for j in range(9):
+            if check_column_valid(j, board) == False:
+                #print('invalid column found at ', j)
+                return False
+        #check roww
+        for i in range(9):
+            if check_row_valid(i, board) == False:
+                #print('invalid row found at ', i)
+                return False
+        #check sub boxes
+        for box in sub_box_origins:
+            if check_sub_box_valid(box[0], box[1], board) == False:
+                #print('invalid subbox found at ', box)
+                return False
         return True
