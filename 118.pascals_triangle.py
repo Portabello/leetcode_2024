@@ -9,7 +9,7 @@ Given an integer numRows, return the first numRows of Pascal's triangle.
 In Pascal's triangle, each number is the sum of the two numbers directly above it as shown:
 
 
- 
+
 
 Example 1:
 
@@ -19,7 +19,7 @@ Example 2:
 
 Input: numRows = 1
 Output: [[1]]
- 
+
 
 Constraints:
 
@@ -28,18 +28,16 @@ testing
 """
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
-        ans = []
-        for x in range(1,numRows+1):
-            if(x==1):
-                ans.append([1])
-            if(x==2):
+        ans = [[1]]
+        while numRows > 1:
+            numRows -= 1
+            t = []
+            if ans[-1] == [1]:
                 ans.append([1,1])
-            if(x>2):
-                tmp_row = []
-                for i,x in enumerate(ans[-1]):
-                    if(i==0):
-                        next
-                    else:
-                        tmp_row.append(ans[-1][i-1]+ans[-1][i])
-                ans.append([1]+tmp_row+[1])
+            else:
+                for i in range(len(ans[-1])-1):
+                    t.append(ans[-1][i] + ans[-1][i+1])
+                t.insert(0, 1)
+                t.append(1)
+                ans.append(t)
         return ans
