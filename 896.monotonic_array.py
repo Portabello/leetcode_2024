@@ -10,7 +10,7 @@ An array nums is monotone increasing if for all i <= j, nums[i] <= nums[j]. An a
 
 Given an integer array nums, return true if the given array is monotonic, or false otherwise.
 
- 
+
 
 Example 1:
 
@@ -24,7 +24,7 @@ Example 3:
 
 Input: nums = [1,3,2]
 Output: false
- 
+
 
 Constraints:
 
@@ -33,18 +33,19 @@ Constraints:
 """
 class Solution:
     def isMonotonic(self, nums: List[int]) -> bool:
-        #0 for increasing, 1 for decreasing
-        monotonic = None
-        for i,x in enumerate(nums):
-            if monotonic == None and i > 0:
-                if nums[i] > nums[i-1]:
-                    monotonic = 0
-                if nums[i] < nums[i-1]:
-                    monotonic = 1
-            elif monotonic == 1:
-                if(nums[i] > nums[i-1]):
+        inc, dec = -1, -1
+        if len(nums) == 1:
+            return True
+        for i in range(len(nums)-1):
+            if inc == -1:
+                if nums[i] < nums[i+1]:
+                    inc, dec = 1, 0
+                if nums[i] > nums[i+1]:
+                    inc, dec = 0, 1
+            if inc == 1:
+                if nums[i] > nums[i+1]:
                     return False
-            elif monotonic == 0:
-                if(nums[i] < nums[i-1]):
+            if dec == 1:
+                if nums[i] < nums[i+1]:
                     return False
         return True

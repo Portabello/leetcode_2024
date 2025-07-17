@@ -9,7 +9,7 @@ Given an integer rowIndex, return the rowIndexth (0-indexed) row of the Pascal's
 In Pascal's triangle, each number is the sum of the two numbers directly above it as shown:
 
 
- 
+
 
 Example 1:
 
@@ -23,7 +23,7 @@ Example 3:
 
 Input: rowIndex = 1
 Output: [1,1]
- 
+
 
 Constraints:
 
@@ -31,23 +31,16 @@ Constraints:
 """
 class Solution:
     def getRow(self, rowIndex: int) -> List[int]:
-        #if rowIndex==0:
-        #    return [1]
-        #if rowIndex==1:
-        #    return [1,1]
-        ans = []
-        for x in range(rowIndex+1):
-            #print(x)
-            if x == 0:
-                ans = [1]
-                continue
-            if x == 1:
-                ans = [1,1]
-                continue
-            nextans = [1]*(len(ans)+1)
-            #print(x, nextans)
-            for i in range(1,len(nextans)-1):
-                nextans[i] = ans[i-1]+ans[i]
-                #print(i)
-            ans = nextans
+        if rowIndex == 0:
+            return [1]
+        if rowIndex == 1:
+            return [1,1]
+        ans=[1,1]
+        for i in range(2,rowIndex+1):
+            t = []
+            for j in range(len(ans)-1):
+                t.append(ans[j]+ans[j+1])
+            t.insert(0,1)
+            t.append(1)
+            ans = t
         return ans
