@@ -8,7 +8,7 @@ Given two strings s and t, return true if t is an anagram of s, and false otherw
 
 An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
 
- 
+
 
 Example 1:
 
@@ -18,31 +18,24 @@ Example 2:
 
 Input: s = "rat", t = "car"
 Output: false
- 
+
 
 Constraints:
 
 1 <= s.length, t.length <= 5 * 104
 s and t consist of lowercase English letters.
- 
+
 """
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        hash_table = {}
-        for x in s:
-            if x in hash_table:
-                hash_table[x] += 1
-            else:
-                hash_table[x] = 1
-        
-        for x in t:
-            if x not in hash_table:
+        s_counter = Counter(s)
+        for c in t:
+            if c not in s_counter:
                 return False
-            if x in hash_table:
-                if hash_table[x] == 1:
-                    del(hash_table[x])
-                else:
-                    hash_table[x] -= 1
-        if(len(hash_table) != 0):
-            return False
-        return True
+            if s_counter[c]==1:
+                del s_counter[c]
+            else:
+                s_counter[c]-=1
+        if len(s_counter)==0:
+            return True
+        return False

@@ -43,6 +43,9 @@ Follow up: Could you implement a solution using only O(1) extra space complexity
 '''
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        for i in range(len(nums)+1):
-            if i not in nums:
-                return i
+        t = Counter(list(range(len(nums) + 1)))
+        for x in nums:
+            if x in t:
+                del t[x]
+        for x in t:
+            return x

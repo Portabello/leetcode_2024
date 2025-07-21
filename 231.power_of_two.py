@@ -35,17 +35,14 @@ Follow up: Could you solve it without loops/recursion?
 """
 class Solution:
     def isPowerOfTwo(self, n: int) -> bool:
-        l,r = 0,31
+        l,r = 0,32
         while l<=r:
             m = (l+r)//2
             cur = 2**m
-            #print(l,m,r, cur)
-
             if cur == n:
                 return True
             elif cur < n:
-                l = m+1
+                l=m+1
             else:
                 r=m-1
-
         return False
