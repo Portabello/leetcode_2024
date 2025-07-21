@@ -36,12 +36,9 @@ class Solution:
         """
         Do not return anything, modify s in-place instead.
         """
-        # 2 pointer solution
-        l,r = 0,len(s)-1
-        while l<r:
-           # print(s[l],'<=>',s[r])
-            t = s[r]
-            s[r] = s[l]
-            s[l] = t
-            l+=1
-            r-=1
+        i,j = 0,len(s)-1
+        while i<j:
+            s[i],s[j] = s[j],s[i]
+            i+=1
+            j-=1
+        return s
