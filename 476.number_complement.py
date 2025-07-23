@@ -9,7 +9,7 @@ The complement of an integer is the integer you get when you flip all the 0's to
 For example, The integer 5 is "101" in binary and its complement is "010" which is the integer 2.
 Given an integer num, return its complement.
 
- 
+
 
 Example 1:
 
@@ -21,7 +21,7 @@ Example 2:
 Input: num = 1
 Output: 0
 Explanation: The binary representation of 1 is 1 (no leading zero bits), and its complement is 0. So you need to output 0.
- 
+
 
 Constraints:
 
@@ -29,6 +29,10 @@ Constraints:
 """
 class Solution:
     def findComplement(self, num: int) -> int:
-        mask_l = len(bin(num)[2:])
-        mask = (2**mask_l)-1
-        return num^mask
+        b_num = list(bin(num)[2:])
+        for i,x in enumerate(b_num):
+            if x == '1':
+                b_num[i] = '0'
+            else:
+                b_num[i] = '1'
+        return int("".join(b_num), 2)
