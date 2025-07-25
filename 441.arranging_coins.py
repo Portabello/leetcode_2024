@@ -25,30 +25,8 @@ Explanation: Because the 4th row is incomplete, we return 3.
 """
 class Solution:
     def arrangeCoins(self, n: int) -> int:
-        if n==1 or n==2:
-            return 1
-       # if n==3:
-            #return 2
-        def triangular_number(x):
-            return (x*(x+1))/2
-        l,r= 0,n
-        while l<=r:
-            m=(l+r)//2
-            tn = triangular_number(m)
-            #print('iteration l=',l,' m=',m,' r=',r)
-            #print('testing ', tn)
-            if tn>=n:
-                #print('1')
-                #check layer below
-                if tn == n:
-                    return m
-                tnn = triangular_number(m-1)
-                if tnn < n:
-                    return m-1
-            if tn>=n:
-                #print('2')
-                r=m
-            else:
-                #print('3')
-                l=m
-        return -1
+        # 1+2+3+...+n = n(n+1)/2
+        for x in range(n+2):
+            calc = (x*(x+1))/2
+            if calc > n:
+                return x-1
