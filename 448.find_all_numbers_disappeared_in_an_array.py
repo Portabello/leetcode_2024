@@ -30,11 +30,9 @@ Follow up: Could you do it without extra space and in O(n) runtime? You may assu
 """
 class Solution:
     def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
-        hs = {}
-        for x in nums:
-            hs[x] = 1
+        counter  = Counter(nums)
         ans = []
-        for i in range(len(nums)):
-            if (i+1) not in hs:
-                ans.append(i+1)
+        for x in range(1,len(nums)+1):
+            if x not in counter:
+                ans.append(x)
         return ans
