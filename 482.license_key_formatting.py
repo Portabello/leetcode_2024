@@ -10,7 +10,7 @@ We want to reformat the string s such that each group contains exactly k charact
 
 Return the reformatted license key.
 
- 
+
 
 Example 1:
 
@@ -23,7 +23,7 @@ Example 2:
 Input: s = "2-5g-3-J", k = 2
 Output: "2-5G-3J"
 Explanation: The string s has been split into three parts, each part has 2 characters except the first part as it could be shorter as mentioned above.
- 
+
 
 Constraints:
 
@@ -31,17 +31,24 @@ Constraints:
 s consists of English letters, digits, and dashes '-'.
 1 <= k <= 104
 """
+import math
 class Solution:
     def licenseKeyFormatting(self, s: str, k: int) -> str:
-        s = list(s)
-        s = [c for c in s if c != "-"]
-        k_count =0
-        ans = ""
-        for i in range(len(s)-1, -1, -1):
-            k_count+=1
-            ans = str(s[i])+ans
-            if k_count==k and i!=0:
-                ans = "-"+ans
-                k_count=0
-        return ans.upper()
-       
+        s = s.replace("-", "")
+        s = s.upper()
+        #print(s)
+        starting_length = k
+        if len(s)%k != 0:
+            starting_length = len(s)%k
+        new_s = ""
+        for i in range(math.ceil(len(s)/k)):
+            if len(new_s)==0:
+                new_s = s[0:starting_length] + '-'
+                #print('starting ', new_s)
+                s = s[starting_length:]
+            else:
+                new_s = new_s + s[0:k] + '-'
+                #print('apppending ', new_s)
+                s = s[k:]
+        #print(new_s)
+        return new_s[:-1]
