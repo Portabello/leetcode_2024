@@ -30,12 +30,11 @@ word consists of lowercase and uppercase English letters.
 '''
 class Solution:
     def detectCapitalUse(self, word: str) -> bool:
-        capital_count = 0
+        first_capital = True if word[0].isupper() else False
+        num_capital = 0
         for c in word:
             if c.isupper():
-                capital_count += 1
-        if capital_count == len(word) or capital_count == 0:
-            return True
-        if capital_count == 1 and word[0].isupper():
+                num_capital += 1
+        if (num_capital==1 and first_capital) or num_capital==len(word) or num_capital==0:
             return True
         return False
