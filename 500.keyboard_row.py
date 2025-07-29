@@ -42,24 +42,22 @@ Constraints:
 '''
 class Solution:
     def findWords(self, words: List[str]) -> List[str]:
-        row1 = "qwertyuiop"
-        row2 = "asdfghjkl"
-        row3 = "zxcvbnm"
+        row1, row2, row3 = ["qwertyuiop"], ["asdfghjkl"], ["zxcvbnm"]
+        hs = {}
+        row=1
+        for x in row1+row2+row3:
+            for y in x:
+                hs[y] = row
+            row +=1
         ans = []
         for word in words:
-            if word[0].lower() in row1:
-                if self.isInRow(word,row1):
-                    ans.append(word)
-            elif word[0].lower() in row2:
-                if self.isInRow(word,row2):
-                    ans.append(word)
-            else:
-                if self.isInRow(word,row3):
-                    ans.append(word)
+            valid = True
+            og=word
+            word = word.lower()
+            row = hs[word[0]]
+            for char in word:
+                if hs[char] != row:
+                    valid = False
+            if valid:
+                ans.append(og)
         return ans
-
-    def isInRow(self, word, row):
-        for c in word:
-            if c.lower() not in row:
-                return False
-        return True
