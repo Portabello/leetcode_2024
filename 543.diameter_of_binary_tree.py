@@ -38,17 +38,44 @@ Constraints:
 #         self.val = val
 #         self.left = left
 #         self.right = right
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        longest = [0]
-        def dfs(root):
-            if root == None:
-                return 0
-
-            left_sum = dfs(root.left)
-            right_sum = dfs(root.right)
-            longest[0] = max(longest[0], (left_sum + right_sum))
-            return 1 + max(left_sum, right_sum)
-
-        dfs(root)
-        return longest[0]
+        node_diameter = [0, 0]
+        def diameterOfNode(node, side, cur_diameter):
+            if side=='root':
+                #if not node.left and not node.right:
+                #    node_diameter[0] = max(node_diameter[0], cur_diameter+1)
+                #    node_diameter[1] = max(node_diameter[1], cur_diameter+1)
+                if node.left:
+                    diameterOfNode(node.left, 'left', 1)
+                if node.right:
+                    diameterOfNode(node.right, 'right', 1)
+            else:
+                if not node.left and not node.right:
+                    if side=='left':
+                        node_diameter[0] = max(node_diameter[0], cur_diameter)
+                    if side=='right':
+                        node_diameter[1] = max(node_diameter[1], cur_diameter)
+                if node.left:
+                    diameterOfNode(node.left, side, cur_diameter+1)
+                if node.right:
+                    diameterOfNode(node.right, side, cur_diameter+1)
+        max_diameter = [0]
+        def traverse(node):
+            node_diameter[0] = 0
+            node_diameter[1] = 0
+            diameterOfNode(node, 'root', 0)
+            #print(node.val, node_diameter)
+            max_diameter[0] = max(max_diameter[0], (node_diameter[0]+node_diameter[1]))
+            if node.left:
+                traverse(node.left)
+            if node.right:
+                traverse(node.right)
+        traverse(root)
+        return max_diameter[0]
