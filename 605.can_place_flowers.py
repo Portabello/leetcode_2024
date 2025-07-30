@@ -29,31 +29,21 @@ There are no two adjacent flowers in flowerbed.
 '''
 class Solution:
     def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
-        consecutive_zeros = 0
+        ans = 0
         for i,x in enumerate(flowerbed):
-            # edge case len==1 flowerbed
-            if len(flowerbed)==1:
-                if n==0:
-                    return True
-                if x==0 and n==1:
-                    return True
-                return False
-            #edge case i==0 or i==len(flowerbed)
             if x==0:
-                if i==0:
-                    #print('edge start')
-                    if flowerbed[i+1] == 0:
-                        n-=1
-                        flowerbed[i] = 1
+                if i==0 and len(flowerbed)>1:
+                    if flowerbed[1]==0:
+                        ans += 1
+                        flowerbed[i]=1
                 elif i==len(flowerbed)-1:
-                    #print('edge end')
-                    if flowerbed[i-1] == 0:
-                        n-=1
-                        flowerbed[i] = 1
+                    if flowerbed[i-1]==0:
+                        ans += 1
+                        flowerbed[i]=1
                 else:
                     if flowerbed[i-1] == 0 and flowerbed[i+1] == 0:
-                        n -= 1
-                        flowerbed[i] = 1
-        if n<=0:
+                        ans += 1
+                        flowerbed[i]=1
+        if ans>=n:
             return True
         return False
