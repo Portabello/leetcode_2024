@@ -29,17 +29,13 @@ Constraints:
 '''
 class Solution:
     def findErrorNums(self, nums: List[int]) -> List[int]:
-        t=[]
-        for x in range(0,len(nums)):
-            t.append(x+1)
-        #print(t)
-        setx = set()
-        duplicate = None
+        hs=Counter(range(1,len(nums)+1))
+        ans = [0,0]
         for x in nums:
-            if x in t:
-                t.remove(x)
-            if x in setx:
-                duplicate = x
+            if x not in hs:
+                ans[0] = x
             else:
-                setx.add(x)
-        return [duplicate, t[0]]
+                del hs[x]
+        for x in hs:
+            ans[1] = x
+        return ans
