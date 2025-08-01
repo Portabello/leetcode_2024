@@ -38,48 +38,32 @@ n == img[i].length
 1 <= m, n <= 200
 0 <= img[i][j] <= 255
 '''
-import copy
 class Solution:
     def imageSmoother(self, img: List[List[int]]) -> List[List[int]]:
-        img_smooth = copy.deepcopy(img)
-        for r,x in enumerate(img):
-            for c,y in enumerate(x):
-                #print(r,c)
-                count = 1
-                sum_cell = y
-                #check each surrounding cell, if exists, add to count/sum_cell
-                #up
-                if (r-1)>=0:
-                    count += 1
-                    sum_cell += img[r-1][c]
-                #up_left
-                if ((r-1)>=0) and (c-1)>=0:
-                    count += 1
-                    sum_cell += img[r-1][c-1]
-                #up_right
-                if ((r-1)>=0) and (c+1)<len(x):
-                    count += 1
-                    sum_cell += img[r-1][c+1]
-                #down
-                if ((r+1)<len(img)):
-                    count += 1
-                    sum_cell += img[r+1][c]
-                #down_left
-                if ((r+1)<len(img)) and (c-1)>=0:
-                    count += 1
-                    sum_cell += img[r+1][c-1]
-                #down_right
-                if ((r+1)<len(img)) and (c+1)<len(x):
-                    count += 1
-                    sum_cell += img[r+1][c+1]
-                #left
-                if (c-1)>=0:
-                    count += 1
-                    sum_cell += img[r][c-1]
-                #right
-                if (c+1)<len(x):
-                    count += 1
-                    sum_cell += img[r][c+1]
-                #print(r,c, 'count:', count, 'sum:', sum_cell)
-                img_smooth[r][c] = floor(sum_cell/count)
-        return img_smooth
+        def is_valid_coordinate(x,y,img):
+            if x>=0 and x<=len(img)-1 and y>=0 and y<=len(img[0])-1:
+                return True
+            return False
+
+        def smooth_cell(x,y,img):
+            cell_summation = 0
+            cell_count = 0
+            smoothed_value = 0
+
+            for i in range(x-1, x+2):
+                for j in range(y-1, y+2):
+                    if is_valid_coordinate(i,j,img):
+                        #print('cell ', i, j, ' valid')
+                        cell_count += 1
+                        cell_summation += img[i][j]
+            if cell_count >0:
+                smoothed_value = cell_summation//cell_count
+            return smoothed_value
+
+        smoothed_img = []
+        for x in range(len(img)):
+            smoothed_img.append([])
+            for y in range(len(img[0])):
+                #print(img[x][y], " smoothed cell value =  ", smooth_cell(x,y,img))
+                smoothed_img[x].append(smooth_cell(x,y,img))
+        return smoothed_img
