@@ -31,32 +31,13 @@ nums is sorted in ascending order.
 '''
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        print('sss')
-        ans =  self.binary_search(nums, target, nums)
-        print(ans)
-        return ans
-    def binary_search(self, nums, target, og):
-        if len(nums)==0:
-            return -1
-        if len(nums)==1:
-            if nums[0]==target:
-                print('found1')
-                return og.index(target)
-            print('notfound')
-            return -1
-        if len(nums)==2:
-            mid = nums[1]
-        else:
-            mid = nums[int(len(nums)/2)]
-
-        if mid == target:
-            print('found')
-            return og.index(mid)
-        elif mid>target:
-            #go left
-            print('mid:', mid, 'going left: ', nums[:int(len(nums)/2)])
-            return self.binary_search(nums[:int(len(nums)/2)], target, og)
-        else:
-            #go right
-            print('mid:', mid, 'going right: ', nums[int(len(nums)/2)+1:])
-            return self.binary_search(nums[int(len(nums)/2)+1:], target, og)
+        l,r = 0,len(nums)-1
+        while l<=r:
+            m=(l+r)//2
+            if nums[m] == target:
+                return m
+            if nums[m] > target:
+                r=m-1
+            else:
+                l=m+1
+        return -1
