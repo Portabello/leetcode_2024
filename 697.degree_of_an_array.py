@@ -36,43 +36,25 @@ nums[i] will be an integer between 0 and 49,999.
 '''
 class Solution:
     def findShortestSubArray(self, nums: List[int]) -> int:
-        degree = {}
-        max_degree_count = 0
-        max_degree = None
-        for x in nums:
-            if x in degree:
-                degree[x]+=1
-            else:
-                degree[x]=1
-            if degree[x]>max_degree_count:
-                    max_degree_count = degree[x]
-                    max_degree = x
-        #print(degree)
-        #print(max_degree, ' : ', max_degree_count)
-        if max_degree_count == 1:
-            return 1
+        degree = 0
+        num_with_max_degree = []
+        hs = Counter(nums)
+        for x in hs:
+            if hs[x] == degree:
+                num_with_max_degree.append(x)
+            if hs[x] > degree:
+                num_with_max_degree = [x]
+                degree = hs[x]
 
-
-        #check for other max_degrees
-        all_max_degree = []
-        for x in degree:
-            if degree[x] == max_degree_count:
-                all_max_degree.append(x)
-        #print(all_max_degree)
-        min_subarray = None
-        for d in all_max_degree:
-            first_index = None
-            last_index = None
-            for i,x in enumerate(nums):
-                if x == d and first_index == None:
-                    first_index = i
-                elif x == d and first_index != None:
-                    last_index = i
-            if min_subarray == None:
-                min_subarray = last_index - first_index + 1
-            else:
-                min_subarray = min(min_subarray, (last_index - first_index + 1))
-
-            #print(d, 'firstindex', first_index)
-            #print(d, 'lastindex', last_index)
-        return min_subarray
+        #print(degree, num_with_max_degree)
+        subarray_len = len(nums)
+        for x in num_with_max_degree:
+            first, last = None, None
+            for i,y in enumerate(nums):
+                if y == x:
+                    if first == None:
+                        first = i
+                    last = i
+            #print('first at ',first,' last at ', last)
+            subarray_len = min(last-first+1, subarray_len)
+        return subarray_len
