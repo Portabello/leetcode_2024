@@ -66,17 +66,14 @@ For operations "C" and "D", there will always be at least one previous score on 
 '''
 class Solution:
     def calPoints(self, operations: List[str]) -> int:
-        scores = []
+        record = []
         for x in operations:
             if x == '+':
-                if len(scores)>=2:
-                    scores.append(scores[-1]+scores[-2])
+                record.append(record[-1]+record[-2])
             elif x == 'D':
-                if len(scores)>=1:
-                    scores.append(2*scores[-1])
+                record.append(record[-1]*2)
             elif x == 'C':
-                if len(scores)>=1:
-                    scores.pop()
+                record.pop()
             else:
-                scores.append(int(x))
-        return sum(scores)
+                record.append(int(x))
+        return sum(record)
