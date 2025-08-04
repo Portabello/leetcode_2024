@@ -31,18 +31,13 @@ s and t consist of lowercase English letters.
 """
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:
-        hs = {}
-        for x in s:
-            if x in hs:
-                hs[x]+=1
-            else:
-                hs[x]=1
-        for x in t:
-            if x in hs:
-                if hs[x] == 1:
-                    del hs[x]
+        hs = Counter(s)
+        for c in t:
+            if c in hs:
+                if hs[c] == 1:
+                    del hs[c]
                 else:
-                    hs[x] -=1
+                    hs[c]-=1
             else:
-                return x
+                return c
         return -1
