@@ -43,26 +43,31 @@ Follow up: Could you do that without using any extra space? (Assume that the imp
 #         self.val = val
 #         self.left = left
 #         self.right = right
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
     def findMode(self, root: Optional[TreeNode]) -> List[int]:
-        hs = {}
+        tree_nums = []
         def traverse(node):
-            if node.val in hs:
-                hs[node.val] += 1
-            else:
-                hs[node.val] = 1
+            tree_nums.append(node.val)
+            if not node.left and not node.right:
+                return
             if node.left:
                 traverse(node.left)
             if node.right:
                 traverse(node.right)
         traverse(root)
-        #print(hs)
-        mode = []
-        count = 0
-        for x in hs:
-            if hs[x] == count:
-                mode.append(x)
-            if hs[x] > count:
-                count = hs[x]
-                mode = [x]
-        return mode
+        counter = Counter(tree_nums)
+        max_frequency = 0
+        modes = []
+        for x in counter:
+            if counter[x]==max_frequency:
+                modes.append(x)
+            if counter[x]>max_frequency:
+                modes = [x]
+                max_frequency = counter[x]
+        return modes
