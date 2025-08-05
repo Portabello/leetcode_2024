@@ -15,7 +15,7 @@ You are given a non-decreasing integer array timeSeries, where timeSeries[i] den
 
 Return the total number of seconds that Ashe is poisoned.
 
- 
+
 
 Example 1:
 
@@ -33,7 +33,7 @@ Explanation: Teemo's attacks on Ashe go as follows:
 - At second 1, Teemo attacks, and Ashe is poisoned for seconds 1 and 2.
 - At second 2 however, Teemo attacks again and resets the poison timer. Ashe is poisoned for seconds 2 and 3.
 Ashe is poisoned for seconds 1, 2, and 3, which is 3 seconds in total.
- 
+
 
 Constraints:
 
@@ -44,9 +44,7 @@ timeSeries is sorted in non-decreasing order.
 class Solution:
     def findPoisonedDuration(self, timeSeries: List[int], duration: int) -> int:
         ans = 0
-        for i in range(len(timeSeries)-1):
-            if timeSeries[i]+duration-1 < timeSeries[i+1]:
-                ans += duration
-            else:
-                ans += (timeSeries[i+1]- timeSeries[i])
-        return ans+duration
+        for i,x in enumerate(timeSeries):
+            if i!=len(timeSeries)-1:
+                ans += min(timeSeries[i+1]-x, duration)
+        return ans + duration
