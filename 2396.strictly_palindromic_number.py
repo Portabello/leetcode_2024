@@ -39,17 +39,22 @@ Constraints:
 '''
 class Solution:
     def isStrictlyPalindromic(self, n: int) -> bool:
-        def decToBaseN(n: int, base: int) -> bool:
+        def dec_to_base(base, x):
             ans = ""
-            while n>0:
-                ans = ans + str(n % base)
-                n = n // base
+            if x == 0:
+                return "0"
+            while x>0:
+                ans = str(x%base) + ans
+                x = x//base
             return ans
-
-        def isPalindrome(n: str) -> bool:
-            return n[::-1]==n
+        
+        def is_palindromic(x):
+            if x == x[::-1]:
+                return True
+            return False
 
         for base in range(2,n-1):
-            if not isPalindrome(decToBaseN(n,base)):
+            #print('n in base ', base, ' is ', dec_to_base(base, n))
+            if not is_palindromic(dec_to_base(base, n)):
                 return False
         return True
