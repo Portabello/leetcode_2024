@@ -41,24 +41,19 @@ Constraints:
 #         self.next = next
 class Solution:
     def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
-        if head == None:
-            return head
-        current = head
+        cur = head
         last = None
-        while current != None:
-            #print("---------------------")
-            #print('head',head)
-            #print('current', current)
-            #print('last', last)
-            if current.val == val:
+        i=1
+        while cur:
+            if cur.val == val:
                 if last == None:
-                    head = current.next
-                    current = current.next
-                    continue
+                    cur = cur.next
+                    head = cur
                 else:
-                    last.next = current.next
-                    current = current.next
-                    continue
-            last = current
-            current = current.next
+                    last.next = cur.next
+                    cur = cur.next
+            else:
+                last = cur
+                cur = cur.next
+            i+=1
         return head
