@@ -10,7 +10,7 @@ Note:
 
 Note that in some languages, such as Java, there is no unsigned integer type. In this case, the input will be given as a signed integer type. It should not affect your implementation, as the integer's internal binary representation is the same, whether it is signed or unsigned.
 In Java, the compiler represents the signed integers using 2's complement notation. Therefore, in Example 3, the input represents the signed integer. -3.
- 
+
 
 Example 1:
 
@@ -27,16 +27,12 @@ Example 3:
 Input: n = 11111111111111111111111111111101
 Output: 31
 Explanation: The input binary string 11111111111111111111111111111101 has a total of thirty one '1' bits.
- 
+
 
 Constraints:
 
 The input must be a binary string of length 32.
  """
- class Solution:
+class Solution:
     def hammingWeight(self, n: int) -> int:
-        count = 0
-        for c in str(bin(n)):
-            if c == "1":
-                count += 1
-        return count
+        return bin(n)[2:].count('1')
