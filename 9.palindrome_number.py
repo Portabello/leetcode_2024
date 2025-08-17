@@ -41,4 +41,4 @@ Follow up: Could you solve it without converting the integer to a string?
 '''
 class Solution:
     def isPalindrome(self, x: int) -> bool:
-        return str(x) ==  str(x)[::-1]
+        return True if str(x)[::-1] == str(x) else False
