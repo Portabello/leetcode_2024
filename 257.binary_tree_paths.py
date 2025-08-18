@@ -35,12 +35,16 @@ The number of nodes in the tree is in the range [1, 100].
 class Solution:
     def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
         ans = []
-        def traverse(node, curpath):
-            if not node.right and not node.left:
-                ans.append(curpath + str(node.val))
+        def traverse(node, cur_path):
+            if len(cur_path)==0:
+                new_path = str(node.val)
+            else:
+                new_path = cur_path + '->' + str(node.val)
+            if not node.left and not node.right:
+                ans.append(new_path)
             if node.left:
-                traverse(node.left, curpath + str(node.val) +  '->')
+                traverse(node.left, new_path)
             if node.right:
-                traverse(node.right, curpath + str(node.val) + '->')
+                traverse(node.right, new_path)
         traverse(root, "")
         return ans
