@@ -33,20 +33,13 @@ Constraints:
 '''
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        if len(nums) <= 1:
-            return True
-        dp = [False]*len(nums)
+        t = [False for _ in range(len(nums))]
+        t[-1] = True
         for i in range(len(nums)-1, -1, -1):
-            #print(nums[i])
-            #check if entry can reach end of array, set to true if it can
-            if (i + nums[i] + 1) >= len(nums):
-                dp[i] = True
-            else:
-                for j in range(nums[i]):
-                    if dp[i + j + 1] == True:
-                        dp[i] = True
-                        break
-        #print(dp)
-        if dp[0]:
+            for y in range(i+1, min(len(nums), i+nums[i]+1)):
+                if t[y]==True:
+                    t[i]=True
+                    break
+        if t[0]==True:
             return True
         return False
