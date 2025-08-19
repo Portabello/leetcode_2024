@@ -41,35 +41,20 @@ Constraints:
 
 class Solution:
     def firstBadVersion(self, n: int) -> int:
-        if n == 1:
-            return 1
-        earliest_bad = None
+        l,r = 0,n
+        bad_version_found = False
+        while l<=r:
+            m=(l+r)//2
+            m_version = isBadVersion(m)
+            if m_version:
+                bad_version_found = True
+            if not bad_version_found:
+                l=m+1
+                continue
+            if bad_version_found:
 
-        mid = int(n/2)
-        start, end = 1, n
-        while end-start > 1:
-            print(start, mid,end)
-            if isBadVersion(mid):
-                print('loop1')
-                if earliest_bad == None:
-                    earliest_bad = mid
+                if m_version == True:
+                    r=m-1
                 else:
-                    earliest_bad = min(earliest_bad, mid)
-                end = mid
-                mid = int((end+start)/2)
-            else:
-                print('loop2')
-                start = mid
-                mid = int((end+start)/2)
-        print(start, mid,end)
-        if isBadVersion(start):
-            if earliest_bad == None:
-                    earliest_bad = start
-            else:
-                earliest_bad = min(earliest_bad, start)
-        if isBadVersion(end):
-            if earliest_bad == None:
-                    earliest_bad = end
-            else:
-                earliest_bad = min(earliest_bad, end)
-        return earliest_bad
+                    l=m+1
+        return l
