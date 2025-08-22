@@ -35,20 +35,22 @@ All the words in s are separated by a single space.
 """
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
-        s=s.split()
-        pattern = list(pattern)
-        #print(s,pattern)
+        hs = {}
+        s = s.split(" ")
+        #print(s)
         if len(s) != len(pattern):
             return False
-        hs = {}
-        for i in range(len(pattern)):
-            #print(s[i],pattern[i])
-            if pattern[i] in hs:
-                if hs[pattern[i]] != s[i]:
-                    return False
-            else:
-                if s[i] in hs.values():
-                    return False
-                else:
-                    hs[pattern[i]] = s[i]
+        def existsInHash(x):
+            for value in hs.values():
+                if x == value:
+                    return True
+            return False
+
+        for i,x in enumerate(list(pattern)):
+            #print(hs)
+            if x not in hs and existsInHash(s[i]):
+                return False
+            if x in hs and hs[x] != s[i]:
+                return False
+            hs[x] = s[i]
         return True
