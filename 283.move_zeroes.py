@@ -30,30 +30,16 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        def movezero(i,n):
-            #print('moving zero@', i, 'to', n)
-            #print('before')
-            #print(nums)
-            for x in range(i,n):
-                #print()
-                t = nums[x+1]
-                nums[x+1] = nums[x]
-                nums[x] = t
-            #print('after')
-            #print(nums)
-            #print('........')
-
-        n = len(nums)-1
-        while True:
-            zerofound = False
-            #print('exploring 0 to',n, nums)
-            for i in range(0,n):
-                if nums[i]==0:
-                    zerofound = True
-                    #print('found @', i, nums[i])
-                    movezero(i,n)
-                    n -= 1
-                    break
-            if zerofound == False:
-                #print('exiting')
-                break
+        end_index = len(nums)-1
+        def moveToEnd(i, end_index, nums):
+            t = nums.pop(i)
+            nums.insert(end_index, t)
+            return nums
+        i = 0
+        while i<=end_index:
+            if nums[i] == 0:
+                moveToEnd(i,end_index,nums)
+                i-=1
+                end_index -=1
+            i+=1
+        return nums
