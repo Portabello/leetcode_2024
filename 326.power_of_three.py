@@ -36,9 +36,13 @@ Follow up: Could you solve it without loops/recursion?
 """
 class Solution:
     def isPowerOfThree(self, n: int) -> bool:
-        for i in range(n):
-            if 3**i == n:
+        l,r = 0,min(1300, n)
+        while l<=r:
+            m=(l+r)//2
+            if 3**m == n:
                 return True
-            if 3**i >n:
-                return False
+            if 3**m < n:
+                l=m+1
+            else:
+                r=m-1
         return False
