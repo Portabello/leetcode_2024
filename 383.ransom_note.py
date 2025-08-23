@@ -31,18 +31,12 @@ ransomNote and magazine consist of lowercase English letters.
 """
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        hs = {}
-        for x in magazine:
-            if x not in hs:
-                hs[x] = 1
-            else:
-                hs[x] += 1
+        hs = Counter(list(magazine))
         for x in ransomNote:
-            if x in hs:
-                if hs[x] == 0:
-                    return False
-                else:
-                    hs[x] -= 1
-            else:
+            if x not in hs:
                 return False
+            if hs[x]==1:
+                del hs[x]
+            else:
+                hs[x]-=1
         return True
