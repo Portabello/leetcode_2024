@@ -35,4 +35,13 @@ Constraints:
 '''
 class Solution:
     def isPerfectSquare(self, num: int) -> bool:
-        return math.sqrt(num).is_integer()
+        l,r = 0,min((num//2)+1, 46341)
+        while l<=r:
+            m=(l+r)//2
+            if m*m == num:
+                return True
+            if m*m < num:
+                l=m+1
+            else:
+                r=m-1
+        return False
