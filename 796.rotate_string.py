@@ -33,11 +33,10 @@ Constraints:
 '''
 class Solution:
     def rotateString(self, s: str, goal: str) -> bool:
-        if s == goal:
-            return True
-        for i in range(len(s)-1):
-            s = s[1:] + s[0]
-            #print(s)
-            if s == goal:
-                return True
+        if Counter(s) != Counter(goal) or len(s) != len(goal):
+            return False
+        for i,x in enumerate(goal):
+            if x == s[0]:
+                if (goal[i:] + goal[0:i]) == s:
+                    return True
         return False
