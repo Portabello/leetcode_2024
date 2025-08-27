@@ -33,18 +33,16 @@ Constraints:
 '''
 class Solution:
     def findMaxAverage(self, nums: List[int], k: int) -> float:
-        maxAverage = None
-        tsum = None
-        for i in range(0,len(nums)-k+1):
-            if tsum == None:
-                tsum = sum(nums[0:k])
+        cur_avg = None
+        max_avg = None
+        for i in range(len(nums)-k+1):
+            #print(nums[i:i+k])
+            if cur_avg == None:
+                cur_avg = sum(nums[i:i+k])/k
+                max_avg = cur_avg
+                #print('init to ', cur_avg)
             else:
-                tsum -= nums[i-1]
-                tsum += nums[i+k-1]
-                #print('removing ', nums[i-1], 'adding ',nums[i+k-1])
-            #print(tsum)
-
-            taverage = tsum/k
-            if maxAverage == None or taverage > maxAverage:
-                maxAverage = taverage
-        return maxAverage
+                cur_avg = ((cur_avg*k)-nums[i-1]+nums[i+k-1])/k
+                #print('removing ', nums[i-1], '  adding: ', nums[i+k-1])
+                max_avg = max(max_avg, cur_avg)
+        return max_avg
