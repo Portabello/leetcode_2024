@@ -22,7 +22,6 @@ Example 2:
 Input: word = "FlaG"
 Output: false
 
-
 Constraints:
 
 1 <= word.length <= 100
@@ -38,4 +37,3 @@ class Solution:
         if num_capital == 0 or (first and num_capital == 1) or num_capital == len(word):
             return True
         return False
-            
