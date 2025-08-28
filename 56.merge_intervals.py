@@ -32,27 +32,22 @@ Constraints:
 '''
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        def mergeInterval(x,y):
+            return [min(x[0],y[0]), max(x[1],y[1])]
+
         intervals.sort()
-        while True:
-            merged = False
-            if len(intervals) == 1:
-                break
-            for i in range(0,len(intervals)-1):
-                #print(intervals[i])
-                #if we can merge with next interval
-                if intervals[i][1] >= intervals[i+1][0]:
-                    #merge and break
-                    #t = [intervals[i][0],intervals[i+1][1]]
-                    t_min = min(intervals[i][0], intervals[i][1], intervals[i+1][0], intervals[i+1][1])
-                    t_max = max(intervals[i][0], intervals[i][1], intervals[i+1][0], intervals[i+1][1])
-                    t = [t_min, t_max]
-                    intervals.insert(i+2, t)
-                    del intervals[i]
-                    del intervals[i]
-                    #break
-                    merged = True
-                    break
-            if merged == False:
-                break
+        ans = []
+        cur = []
+        for interval in intervals:
+            if len(cur) == 0:
+                cur = interval
+            else:
+                if interval[0]<=cur[1]:
+                    cur = mergeInterval(cur, interval)
+                else:
+                    ans.append(cur)
+                    cur = interval
+        ans.append(cur)
+        return ans
             #break
         return intervals
