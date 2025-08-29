@@ -28,14 +28,4 @@ s and t consist of lowercase English letters.
 """
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        s_counter = Counter(s)
-        for c in t:
-            if c not in s_counter:
-                return False
-            if s_counter[c]==1:
-                del s_counter[c]
-            else:
-                s_counter[c]-=1
-        if len(s_counter)==0:
-            return True
-        return False
+        return Counter(s)==Counter(t)
