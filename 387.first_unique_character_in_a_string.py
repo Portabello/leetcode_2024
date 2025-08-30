@@ -6,7 +6,7 @@ Easy
 Companies
 Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
 
- 
+
 
 Example 1:
 
@@ -20,7 +20,7 @@ Example 3:
 
 Input: s = "aabb"
 Output: -1
- 
+
 
 Constraints:
 
@@ -29,13 +29,8 @@ s consists of only lowercase English letters.
 """
 class Solution:
     def firstUniqChar(self, s: str) -> int:
-        tally = {}
-        for c in s:
-            if c in tally:
-                tally[c] += 1
-            else:
-                tally[c] = 1
-        for x in tally:
-            if tally[x] == 1:
-                return s.index(x)
+        hs = Counter(s)
+        for i,c in enumerate(s):
+            if hs[c]==1:
+                return i
         return -1
