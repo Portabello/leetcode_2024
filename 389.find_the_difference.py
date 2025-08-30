@@ -34,10 +34,9 @@ class Solution:
         hs = Counter(s)
         for c in t:
             if c in hs:
-                if hs[c] == 1:
+                if hs[c]==1:
                     del hs[c]
                 else:
                     hs[c]-=1
             else:
                 return c
-        return -1
