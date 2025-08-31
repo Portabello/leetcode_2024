@@ -28,18 +28,17 @@ Constraints:
 """
 class Solution:
     def toHex(self, num: int) -> str:
-        ans = ''
-        hs = {10:'a',11:'b',12:'c',13:'d',14:'e',15:'f'}
-        if num <0:
+        ans = ""
+        hex_table = {10:'a',11:'b',12:'c',13:'d',14:'e',15:'f'}
+        if num == 0:
+            return '0'
+        if num<0:
             num = (2**32)+num
-        if num==0:
-            return "0"
-        #print(num)
-        while num != 0:
-            t = num % 16
+        while num >0:
+            t = num%16
             if t>9:
-                t=hs[t]
-            ans = str(t) + ans
-            #print(t)
+                ans = hex_table[t] + ans
+            else:
+                ans = str(t) + ans
             num = num//16
         return ans
