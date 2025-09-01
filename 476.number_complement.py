@@ -29,10 +29,11 @@ Constraints:
 """
 class Solution:
     def findComplement(self, num: int) -> int:
-        b_num = list(bin(num)[2:])
-        for i,x in enumerate(b_num):
-            if x == '1':
-                b_num[i] = '0'
+        num = bin(num)[2:]
+        ans = ""
+        for c in num:
+            if c=='1':
+                ans+='0'
             else:
-                b_num[i] = '1'
-        return int("".join(b_num), 2)
+                ans+='1'
+        return int(ans, 2)
