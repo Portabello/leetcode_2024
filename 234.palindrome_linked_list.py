@@ -38,8 +38,8 @@ Follow up: Could you do it in O(n) time and O(1) space?
 #         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        t = []
+        nums = []
         while head:
-            t.append(head.val)
+            nums.append(head.val)
             head = head.next
-        return t==t[::-1]
+        return nums == nums[::-1]
