@@ -52,27 +52,34 @@ class Solution:
     def convert(self, s: str, numRows: int) -> str:
         if numRows == 1:
             return s
-        direction = 'DOWN'
-        layer = 0
-        i,j = 0,0
-        zigzag = [[None] * len(s) for _ in range(numRows)]
-        #print(zigzag)
+        t = [[""] * len(s) for x in range(numRows)]
+        #print(t)
+        column, row = 0, 0
+        direction = 'down'
         for c in s:
-            #print(i,j, '=', c)
-            zigzag[i][j] = c
-            if i == numRows-1 and direction == 'DOWN':
-                direction = 'UP'
-            elif i==0 and direction == 'UP':
-                direction = 'DOWN'
-            if direction == 'DOWN':
-                i += 1
-            if direction == 'UP':
-                i -= 1
-                j += 1
-        #print(zigzag)
+            #print(row, column, direction)
+            if direction == 'down':
+                if row == len(t)-1:
+                    t[row][column] = c
+                    row -= 1
+                    column += 1
+                    direction = 'up'
+                else:
+                    t[row][column] = c
+                    row += 1
+            else:
+                if row == 0:
+                    t[row][column] = c
+                    row += 1
+                    direction = 'down'
+                else:
+                    t[row][column] = c
+                    row -= 1
+                    column += 1
         ans = ""
-        for x in zigzag:
+        for x in t:
+            #print(x)
             for y in x:
-                if y!= None:
+                if y != '':
                     ans = ans + y
         return ans
