@@ -12,7 +12,7 @@ We define xi as the number whose binary representation is the subarray nums[0..i
 For example, if nums = [1,0,1], then x0 = 1, x1 = 2, and x2 = 5.
 Return an array of booleans answer where answer[i] is true if xi is divisible by 5.
 
- 
+
 
 Example 1:
 
@@ -24,7 +24,7 @@ Example 2:
 
 Input: nums = [1,1,1]
 Output: [false,false,false]
- 
+
 
 Constraints:
 
@@ -33,13 +33,8 @@ nums[i] is either 0 or 1.
 """
 class Solution:
     def prefixesDivBy5(self, nums: List[int]) -> List[bool]:
-        binary = ""
         ans = []
-        for x in range(len(nums)):
-            binary = binary+str(nums[x])
-            #print(binary, int(binary,2))
-            if int(binary, 2)%5 == 0:
-                ans.append(True)
-            else:
-                ans.append(False)
+        for i in range(len(nums)):
+            s = ''.join(map(str, nums[:i+1]))
+            ans.append( True if int(s,2)%5==0 else False)
         return ans
