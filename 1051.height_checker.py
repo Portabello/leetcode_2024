@@ -11,13 +11,13 @@ You are given an integer array heights representing the current order that the s
 
 Return the number of indices where heights[i] != expected[i].
 
- 
+
 
 Example 1:
 
 Input: heights = [1,1,4,2,1,3]
 Output: 3
-Explanation: 
+Explanation:
 heights:  [1,1,4,2,1,3]
 expected: [1,1,1,2,3,4]
 Indices 2, 4, and 5 do not match.
@@ -37,7 +37,7 @@ Explanation:
 heights:  [1,2,3,4,5]
 expected: [1,2,3,4,5]
 All indices match.
- 
+
 
 Constraints:
 
@@ -46,10 +46,20 @@ Constraints:
 """
 class Solution:
     def heightChecker(self, heights: List[int]) -> int:
-        ans = 0
-        unsorted = heights[:]
-        heights.sort()
-        for i,x in enumerate(heights):
-            if x != unsorted[i]:
-                ans += 1
-        return ans
+        def insertion_sort(arr):
+            t = 0
+            for i in range(len(arr)):
+                cur = arr[i]
+                for j in range(0,i):
+                    if cur <= arr[j]:
+                        del arr[i]
+                        arr.insert(j, cur)
+                        break
+            return arr
+
+        expected = insertion_sort(heights[::])
+        discrepancies = 0
+        for i in range(len(heights)):
+            if expected[i] != heights[i]:
+                discrepancies += 1
+        return discrepancies
