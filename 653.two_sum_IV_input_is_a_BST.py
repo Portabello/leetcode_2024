@@ -37,15 +37,16 @@ Constraints:
 #         self.right = right
 class Solution:
     def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
-        hs = {}
+        nums = []
         ans = [False]
         def traverse(node):
-            if k-node.val in hs:
-                ans[0] = True
-            hs[node.val] = 1
+            if k-node.val in nums:
+                ans[0] =True
+            nums.append(node.val)
             if node.left:
                 traverse(node.left)
             if node.right:
                 traverse(node.right)
         traverse(root)
         return ans[0]
+        
