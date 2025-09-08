@@ -50,27 +50,30 @@ Constraints:
 #         self.next = next
 class Solution:
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        return_head = None
-        if head == None:
-            return head
-        if head:
+        ans = None
+        prev = None
+        while head:
+            #print('.....')
             if head.next:
-                return_head = head.next
+                #print('swapping ', head.val, head.next.val)
+                t=head
+                t_next = head.next.next
+                #print('t: ', t, ' t_next: ', t_next)
+                head = head.next
+                head.next = t
+                head.next.next = t_next
+                #print(head,';;;;;', head.next)
+                if ans == None:
+                    ans = head
+                if prev:
+                    prev.next = head
+                prev = head.next
+                head = head.next.next
+
+
             else:
-                return head
-        current = head
-        last = None
-        while current:
-            if current.next:
-                t = current.next
-                current.next = t.next
-                t.next = current
-                if last:
-                    last.next = t
-                last = t.next
-                current = current.next
-            else:
+                #print('breaking')
+                if ans == None:
+                    ans = head
                 break
-            #print(current)
-            #print(last)
-        return return_head
+        return ans
