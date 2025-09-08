@@ -9,7 +9,7 @@ Given a string containing digits from 2-9 inclusive, return all possible letter 
 A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
 
 
- 
+
 
 Example 1:
 
@@ -23,7 +23,7 @@ Example 3:
 
 Input: digits = "2"
 Output: ["a","b","c"]
- 
+
 
 Constraints:
 
@@ -32,26 +32,15 @@ digits[i] is a digit in the range ['2', '9'].
 """
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        code = ["","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"]
+        mapping = {2:'abc', 3:'def', 4:'ghi', 5:'jkl', 6:'mno', 7:'pqrs', 8:'tuv', 9:'wxyz'}
         ans = []
-        n = len(digits)
-
-        if n==1:
-            for x in code[int(digits)]:
-                ans.append(x)
-        if n==2:
-            for x in code[int(digits[0])]:
-                for y in code[int(digits[1])]:
-                    ans.append(x+y)
-        if n==3:
-            for x in code[int(digits[0])]:
-                for y in code[int(digits[1])]:
-                    for z in code[int(digits[2])]:
-                        ans.append(x+y+z)
-        if n==4:
-            for x in code[int(digits[0])]:
-                for y in code[int(digits[1])]:
-                    for z in code[int(digits[2])]:
-                        for v in code[int(digits[3])]:
-                            ans.append(x+y+z+v)
+        if digits == "":
+            return []
+        def recurse(num, cur_combination):
+            if len(num)==0:
+                ans.append(cur_combination)
+                return
+            for c in mapping[int(num[0])]:
+                recurse(num[1:], cur_combination+c)
+        recurse(digits, "")
         return ans
