@@ -13,7 +13,7 @@ Return the maximum amount of water a container can store.
 
 Notice that you may not slant the container.
 
- 
+
 
 Example 1:
 
@@ -25,7 +25,7 @@ Example 2:
 
 Input: height = [1,1]
 Output: 1
- 
+
 
 Constraints:
 
@@ -35,29 +35,13 @@ n == height.length
 """
 class Solution:
     def maxArea(self, height: List[int]) -> int:
-        if len(height) == 1:
-            return 0
-        left_ptr = [height[0], 0]
-        right_ptr = [height[len(height)-1], len(height)-1]
-        #max_area = self.calc_area(left_ptr, right_ptr)
         max_area = 0
-        while left_ptr[1] != right_ptr[1]:
-            tmp_area = self.calc_area(left_ptr, right_ptr)
-            max_area = max(max_area, tmp_area)
-            min_side = self.min_side(left_ptr, right_ptr)
-            if min_side == "left":
-                left_ptr = [height[left_ptr[1]+1], left_ptr[1]+1]
+        l,r = 0,len(height)-1
+        while l<r:
+            cur_area = min(height[l], height[r]) * (r-l)
+            max_area = max(max_area, cur_area)
+            if height[l] < height[r]:
+                l+=1
             else:
-                right_ptr = [height[right_ptr[1]-1], right_ptr[1]-1]
+                r-=1
         return max_area
-
-    def min_side(self, a, b):
-        if(a[0]<b[0]):
-            return "left"
-        return "right"
-
-
-    def calc_area(self, a, b):
-        height = min(a[0], b[0])
-        length = abs(a[1]-b[1])
-        return int(length*height)
