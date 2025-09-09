@@ -47,16 +47,14 @@ The number of nodes in the tree is in the range [0, 5000].
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         ans = [False]
-        if not root:
-            return False
         def traverse(node, cursum):
-            newsum = cursum + node.val
-            if not node.right and not node.left:
-                if newsum == targetSum:
-                    ans[0] = True
+            if not node:
+                return
+            if cursum+node.val==targetSum and not node.right and not node.left:
+                ans[0]=True
             if node.left:
-                traverse(node.left, newsum)
+                traverse(node.left, cursum+node.val)
             if node.right:
-                traverse(node.right, newsum)
+                traverse(node.right, cursum+node.val)
         traverse(root, 0)
         return ans[0]
