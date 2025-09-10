@@ -54,13 +54,13 @@ Constraints:
 '''
 class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
-        hs = {}
+        mapping = {}
         for i in range(len(s)):
-            if s[i] in hs:
-                if hs[s[i]] != t[i]:
+            if s[i] in mapping:
+                if mapping[s[i]] != t[i]:
                     return False
             else:
-                if t[i] in hs.values():
+                if t[i] in mapping.values():
                     return False
-                hs[s[i]] = t[i]
+                mapping[s[i]] = t[i]
         return True
