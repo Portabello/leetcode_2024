@@ -37,17 +37,11 @@ All the words in sentence are separated by a single space.
 '''
 class Solution:
     def toGoatLatin(self, sentence: str) -> str:
-        vowel = "aeiouAEIOU"
-        answer = ""
-        sentence = sentence.split()
-        print(sentence)
-        for i,s in enumerate(sentence):
-            #is vowel
-            if s[0] in vowel:
-                answer = answer + s + "ma" + "a"*(i+1)
-            #is constanant
+        sentence = sentence.split(" ")
+        vowels = ['a','e','i','o','u']
+        for i,word in enumerate(sentence):
+            if word[0].lower() in vowels:
+                sentence[i] = word + 'ma' + 'a'*(i+1)
             else:
-                answer = answer + s[1:] + s[0] + "ma" + "a"*(i+1)
-            if i != len(sentence)-1:
-                answer = answer + " "
-        return answer
+                sentence[i] = word[1:] + word[0] + 'ma' + 'a'*(i+1)
+        return " ".join(sentence)
