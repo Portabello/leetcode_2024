@@ -6,7 +6,7 @@ Easy
 Companies
 Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
 
- 
+
 
 Example 1:
 
@@ -19,7 +19,7 @@ Example 2:
 Input: haystack = "leetcode", needle = "leeto"
 Output: -1
 Explanation: "leeto" did not occur in "leetcode", so we return -1.
- 
+
 
 Constraints:
 
@@ -28,7 +28,7 @@ haystack and needle consist of only lowercase English characters.
 """
 class Solution:
     def strStr(self, haystack: str, needle: str) -> int:
-        for i,x in enumerate(haystack):
-            if needle == haystack[i:i+len(needle)]:
+        for i in range(len(haystack)-len(needle)+1):
+            if haystack[i:len(needle)+i] == needle:
                 return i
         return -1
