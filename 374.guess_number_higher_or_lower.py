@@ -17,7 +17,7 @@ You call a pre-defined API int guess(int num), which returns three possible resu
 0: your guess is equal to the number I picked (i.e. num == pick).
 Return the number that I picked.
 
- 
+
 
 Example 1:
 
@@ -31,7 +31,7 @@ Example 3:
 
 Input: n = 2, pick = 1
 Output: 1
- 
+
 
 Constraints:
 
@@ -45,18 +45,23 @@ Constraints:
 #          otherwise return 0
 # def guess(num: int) -> int:
 
+# The guess API is already defined for you.
+# @param num, your guess
+# @return -1 if num is higher than the picked number
+#          1 if num is lower than the picked number
+#          otherwise return 0
+# def guess(num: int) -> int:
+
 class Solution:
     def guessNumber(self, n: int) -> int:
-        ans = self.recursive_guess(1,n)
-        print(ans)
-        return ans
-    def recursive_guess(self, a, b):
-        guessx = randint(a,b)
-        ans = guess(guessx)
-        print(guessx, ans)
-        if(ans == 0):
-            return guessx
-        elif(ans == 1):
-            return self.recursive_guess(guessx,b)
-        elif(ans == -1):
-            return self.recursive_guess(a,guessx)
+        l,r = 1,n
+        while l<=r:
+            m=(l+r)//2
+            g = guess(m)
+            if g==0:
+                return m
+            if g==-1:
+                r=m-1
+            else:
+                l=m+1
+        
