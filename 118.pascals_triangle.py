@@ -28,16 +28,14 @@ testing
 """
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
-        ans = [[1]]
-        while numRows > 1:
-            numRows -= 1
+        ans = [[1], [1,1]]
+        if numRows==1:
+            return[[1]]
+        for row in range(2,numRows):
             t = []
-            if ans[-1] == [1]:
-                ans.append([1,1])
-            else:
-                for i in range(len(ans[-1])-1):
-                    t.append(ans[-1][i] + ans[-1][i+1])
-                t.insert(0, 1)
-                t.append(1)
-                ans.append(t)
+            for i in range(len(ans[-1])-1):
+                t.append(ans[-1][i]+ans[-1][i+1])
+            t.append(1)
+            t.insert(0,1)
+            ans.append(t)
         return ans
