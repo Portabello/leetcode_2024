@@ -41,11 +41,26 @@ digits does not contain any leading 0's.
 """
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
-        t = ""
-        for x in digits:
-            t = t + str(x)
-        t = str(int(t) + 1)
-        ans = []
-        for x in str(t):
-            ans.append(int(x))
-        return ans
+        carry = 0
+        for i in range(len(digits)-1, -1, -1):
+            #print(digits[i])
+            if i==len(digits)-1:
+                if digits[i]==9:
+                    digits[i]=0
+                    carry = 1
+                else:
+                    digits[i]+=1
+                    carry = 0
+                    break
+            else:
+                if carry:
+                    if digits[i]==9:
+                        digits[i]=0
+                        carry = 1
+                    else:
+                        digits[i]+=1
+                        carry = 0
+                        break
+        if carry:
+            digits.insert(0, 1)
+        return digits
