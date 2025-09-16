@@ -8,7 +8,7 @@ A phrase is a palindrome if, after converting all uppercase letters into lowerca
 
 Given a string s, return true if it is a palindrome, or false otherwise.
 
- 
+
 
 Example 1:
 
@@ -26,7 +26,7 @@ Input: s = " "
 Output: true
 Explanation: s is an empty string "" after removing non-alphanumeric characters.
 Since an empty string reads the same forward and backward, it is a palindrome.
- 
+
 
 Constraints:
 
@@ -35,12 +35,12 @@ s consists only of printable ASCII characters.
 
 
 """
-import re
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        stripped_s = re.sub(r'\W+', '', s).lower()
-        stripped_s = stripped_s.replace("_", "")
-        reverse_stripped_s = stripped_s[::-1]       
-        if(stripped_s == reverse_stripped_s):
-            return True
-        return False
+        t = ""
+        for c in s:
+            if c.isalpha():
+                t = t + c.lower()
+            if c.isdigit():
+                t = t + str(c)
+        return t==t[::-1]
