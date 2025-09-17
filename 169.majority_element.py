@@ -27,7 +27,7 @@ Follow-up: Could you solve the problem in linear time and in O(1) space?
 """
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        counter = Counter(nums)
+        counter=Counter(nums)
         for x in counter:
-            if counter[x] > len(nums)//2:
+            if counter[x]>len(nums)//2:
                 return x
