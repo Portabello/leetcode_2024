@@ -10,7 +10,7 @@ Merge the two lists into one sorted list. The list should be made by splicing to
 
 Return the head of the merged linked list.
 
- 
+
 
 Example 1:
 
@@ -25,7 +25,7 @@ Example 3:
 
 Input: list1 = [], list2 = [0]
 Output: [0]
- 
+
 
 Constraints:
 
@@ -38,28 +38,43 @@ Both list1 and list2 are sorted in non-decreasing order.
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        ans = ListNode()
-        head = ans
-        while list1 or list2: 
-            if list1 and list2:
-                if list1.val <= list2.val:
-                    head.next = list1
-                    list1 = list1.next
-                    head = head.next
+        head = None
+        cur = None
+        while list1 or list2:
+            if list1 and not list2:
+                if head == None:
+                    head = list1
+                    cur = list1
                 else:
-                    head.next = list2
-                    list2 = list2.next
-                    head = head.next
-        
-            elif list1 and not list2:
-                head.next = list1
+                    cur.next = list1
+                    cur = cur.next
                 list1 = list1.next
-                head = head.next
             elif list2 and not list1:
-                head.next = list2
+                if head == None:
+                    head = list2
+                    cur = list2
+                else:
+                    cur.next = list2
+                    cur = cur.next
                 list2 = list2.next
-                head = head.next
-
-        return ans.next
+            elif list1 and list2:
+                if list1.val<list2.val:
+                    next_node = list1
+                    list1 = list1.next
+                else:
+                    next_node = list2
+                    list2 = list2.next
+                if head == None:
+                    head = next_node
+                    cur = next_node
+                else:
+                    cur.next = next_node
+                    cur = cur.next
+        return head
