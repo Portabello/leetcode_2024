@@ -14,7 +14,7 @@ A group is considered large if it has 3 or more characters.
 
 Return the intervals of every large group sorted in increasing order by start index.
 
- 
+
 
 Example 1:
 
@@ -31,7 +31,7 @@ Example 3:
 Input: s = "abcdddeeeeaabbbcd"
 Output: [[3,5],[6,9],[12,14]]
 Explanation: The large groups are "ddd", "eeee", and "bbb".
- 
+
 
 Constraints:
 
@@ -40,21 +40,16 @@ s contains lowercase English letters only.
 """
 class Solution:
     def largeGroupPositions(self, s: str) -> List[List[int]]:
-        grp_len = 0
-        grp_type = ""
-        grp_start_index = 0
-        ans = []
-        tmp_ans = []
-        for i,c in enumerate(s):
-            print(i,c)
-            if c==grp_type:
-                grp_len += 1
+        large_groups = []
+        cur_group, cur_char = [0,0], s[0]
+        for i in range(len(s)):
+            if s[i] == cur_char:
+                cur_group[1] = i
             else:
-                if grp_len >= 3:
-                    ans.append([grp_start_index, i-1])
-                grp_type = c
-                grp_len = 1
-                grp_start_index = i
-        if grp_len >= 3:
-            ans.append([grp_start_index, i])
-        return ans
+                if cur_group[1]-cur_group[0] >= 2:
+                    large_groups.append(cur_group)
+                cur_group = [i,i]
+                cur_char = s[i]
+        if cur_group[1]-cur_group[0] >= 2:
+            large_groups.append(cur_group)
+        return large_groups
