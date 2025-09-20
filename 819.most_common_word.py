@@ -36,31 +36,27 @@ banned[i] consists of only lowercase English letters.
 '''
 class Solution:
     def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
-        #remove symbols
-        new = ""
+        hs = {}
+        cur_word = ""
+        words = []
         for c in paragraph:
-            if c not in "!?',;.":
-                new += c.lower()
+            if c.isalpha():
+                cur_word = cur_word + c.lower()
             else:
-                new += " "
-
-        paragraph = new.split()
-
-        new_paragraph = []
-        for x in paragraph:
-            if x not in banned:
-                new_paragraph.append(x)
-        print(new_paragraph)
-        dictx = {}
-        for x in new_paragraph:
-            if x in dictx:
-                dictx[x]+=1
+                if cur_word not in banned and cur_word!="":
+                    words.append(cur_word)
+                cur_word = ""
+        if cur_word not in banned:
+            words.append(cur_word)
+        print(words)
+        for word in words:
+            if word in hs:
+                hs[word]+=1
             else:
-                dictx[x]=1
-        most_common = 0
-        max_word = None
-        for x in dictx:
-            if dictx[x] > most_common:
-                most_common = dictx[x]
+                hs[word]=1
+        max_frequency, max_word =0, -1
+        for x in hs:
+            if hs[x]>max_frequency:
+                max_frequency=hs[x]
                 max_word = x
         return max_word
