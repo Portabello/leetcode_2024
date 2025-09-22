@@ -41,20 +41,16 @@ Constraints:
 #         self.right = right
 class Solution:
     def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
-        order = []
-        def dfs(root):
-            if not root.left and not root.right:
-                order.append(root.val)
-            else:
-                if root.left:
-                    dfs(root.left)
-                if root.right:
-                    dfs(root.right)
-        dfs(root1)
-        root1_order = order
-        order = []
-        dfs(root2)
-        root2_order = order
-        #print(root1_order)
-        #print(root2_order)
-        return root1_order == root2_order
+        def traverse(path, node):
+            if not node.left and not node.right:
+                path.append(node.val)
+            if node.left:
+                traverse(path, node.left)
+            if node.right:
+                traverse(path, node.right)
+        path1, path2 = [], []
+        traverse(path1, root1)
+        print(path1)
+        traverse(path2, root2)
+        print(path2)
+        return path1==path2
