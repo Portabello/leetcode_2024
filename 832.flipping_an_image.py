@@ -12,7 +12,7 @@ For example, flipping [1,1,0] horizontally results in [0,1,1].
 To invert an image means that each 0 is replaced by 1, and each 1 is replaced by 0.
 
 For example, inverting [0,1,1] results in [1,0,0].
- 
+
 
 Example 1:
 
@@ -26,7 +26,7 @@ Input: image = [[1,1,0,0],[1,0,0,1],[0,1,1,1],[1,0,1,0]]
 Output: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
 Explanation: First reverse each row: [[0,0,1,1],[1,0,0,1],[1,1,1,0],[0,1,0,1]].
 Then invert the image: [[1,1,0,0],[0,1,1,0],[0,0,0,1],[1,0,1,0]]
- 
+
 
 Constraints:
 
@@ -37,15 +37,9 @@ images[i][j] is either 0 or 1.
 """
 class Solution:
     def flipAndInvertImage(self, image: List[List[int]]) -> List[List[int]]:
-        return self.invert(self.flip(image))
-    
-    def flip(self, image):
         for row in image:
-            row.reverse()
-        return image
-
-    def invert(self, image):
-        for r,row in enumerate(image):
-            for c,bit in enumerate(row):
-                image[r][c] = 1 if bit==0 else 0
+            if row:
+                for i in range(len(row)):
+                    row[i] = 1 - row[i]
+            row = row.reverse()
         return image
