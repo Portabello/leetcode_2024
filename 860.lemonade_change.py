@@ -39,31 +39,24 @@ bills[i] is either 5, 10, or 20.
 '''
 class Solution:
     def lemonadeChange(self, bills: List[int]) -> bool:
-        change = {5:0, 10:0, 20:0}
+        current_bills = {5:0, 10:0, 20:0}
         for x in bills:
             if x == 5:
-                change[5]+=1
-            elif x == 10:
-                if change[5]!=0:
-                    change[10]+=1
-                    change[5]-=1
+                current_bills[5]+=1
+            if x == 10:
+                if current_bills[5]>=1:
+                    current_bills[5]-=1
+                    current_bills[10]+=1
                 else:
                     return False
-            elif x == 20:
-                if change[5] ==  0:
-                    return False
-                elif change[10]==0:
-                    if change[5]>=3:
-                        change[20]+=1
-                        change[5]-=3
-                    else:
-                        return False
+            if x==20:
+                if current_bills[5]>=1 and current_bills[10]>=1:
+                    current_bills[5]-=1
+                    current_bills[10]-=1
+                    current_bills[20]+=1
+                elif current_bills[5]>=3:
+                    current_bills[5]-=3
+                    current_bills[20]+=1
                 else:
-                    if change[10]>=1 and change[5]>=1:
-                        change[20]+=1
-                        change[10]-=1
-                        change[5]-=1
-                    else:
-                        return False
-            print(change)
+                    return False
         return True
