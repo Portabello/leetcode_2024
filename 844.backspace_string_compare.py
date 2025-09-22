@@ -37,19 +37,14 @@ Follow up: Can you solve it in O(n) time and O(1) space?
 '''
 class Solution:
     def backspaceCompare(self, s: str, t: str) -> bool:
-        print(self.text_in_editor(s))
-        print(self.text_in_editor(t))
-        if self.text_in_editor(s) == self.text_in_editor(t):
-            return True
-        return False
-
-    def text_in_editor(self, s):
-        ans = ""
-        for c in s:
-            if c=='#' and len(ans)!= 0:
-                ans = ans[:-1]
-            elif c=='#' and len(ans)==0:
-                continue
-            else:
-                ans = ans + c
-        return ans
+        def type_string(string):
+            typed_string = ""
+            for c in string:
+                if c == '#':
+                    typed_string = typed_string[:-1]
+                else:
+                    typed_string = typed_string + c
+            return typed_string
+        #print(type_string(s))
+        #print(type_string(t))
+        return type_string(s) == type_string(t)
