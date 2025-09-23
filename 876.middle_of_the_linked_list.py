@@ -8,7 +8,7 @@ Given the head of a singly linked list, return the middle node of the linked lis
 
 If there are two middle nodes, return the second middle node.
 
- 
+
 
 Example 1:
 
@@ -22,7 +22,7 @@ Example 2:
 Input: head = [1,2,3,4,5,6]
 Output: [4,5,6]
 Explanation: Since the list has two middle nodes with values 3 and 4, we return the second one.
- 
+
 
 Constraints:
 
@@ -34,19 +34,19 @@ The number of nodes in the list is in the range [1, 100].
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+import math
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        len = 0
-        head_ref = head
+        ll_len = 0
+        cur = head
+        while cur:
+            ll_len += 1
+            cur = cur.next
+        middle_index = math.ceil((ll_len-1)/2)
+        index = 0
         while head:
-            len += 1
-            head = head.next
-        mid = int(len/2)
-        len = 0
-        head = head_ref
-        while head:
-            if len == mid:
+            if index == middle_index:
                 return head
-            len += 1
+            index += 1
             head = head.next
-         
+        return -1
