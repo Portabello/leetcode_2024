@@ -39,32 +39,37 @@ n == grid.length == grid[i].length
 '''
 class Solution:
     def surfaceArea(self, grid: List[List[int]]) -> int:
-        sum = 0
-        for i,x in enumerate(grid):
-            for j,y in enumerate(x):
-                #print(y)
-                #bottom and top
-                if y!= 0:
-                    sum += 2
-                #up
-                if i == 0:
-                    sum += y
-                elif y>grid[i-1][j]:
-                    sum += y-grid[i-1][j]
-                #down
+        ans = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                node_sum = 2
+                cur_node = grid[i][j]
+                if cur_node ==0:
+                    node_sum-=2
+                #top
+                if i==0:
+                    node_sum += cur_node
+                else:
+                    if grid[i-1][j]<cur_node:
+                        node_sum += cur_node - grid[i-1][j]
+                #bottom
                 if i == len(grid)-1:
-                    sum += y
-                elif y>grid[i+1][j]:
-                    sum += y-grid[i+1][j]
+                    node_sum += cur_node
+                else:
+                    if grid[i+1][j]<cur_node:
+                        node_sum += cur_node - grid[i+1][j]
                 #left
-                if j==0:
-                    sum += y
-                elif y>grid[i][j-1]:
-                    sum += y-grid[i][j-1]
+                if j == 0:
+                    node_sum += cur_node
+                else:
+                    if grid[i][j-1]<cur_node:
+                        node_sum += cur_node - grid[i][j-1]
                 #right
-                if j==len(x)-1:
-                    sum += y
-                elif y>grid[i][j+1]:
-                    sum+= y-grid[i][j+1]
-                print(y, " : ", sum)
-        return sum
+                if j == len(grid[0])-1:
+                    node_sum += cur_node
+                else:
+                    if grid[i][j+1]<cur_node:
+                        node_sum += cur_node - grid[i][j+1]
+                #print('[',i,',',j,'] node: ',cur_node, '  sum: ',node_sum)
+                ans += node_sum
+        return ans
