@@ -10,7 +10,7 @@ A word is uncommon if it appears exactly once in one of the sentences, and does 
 
 Given two sentences s1 and s2, return a list of all the uncommon words. You may return the answer in any order.
 
- 
+
 
 Example 1:
 
@@ -20,7 +20,7 @@ Example 2:
 
 Input: s1 = "apple apple", s2 = "banana"
 Output: ["banana"]
- 
+
 
 Constraints:
 
@@ -31,19 +31,14 @@ All the words in s1 and s2 are separated by a single space.
 """
 class Solution:
     def uncommonFromSentences(self, s1: str, s2: str) -> List[str]:
-        common = {}
-        for s in s1.split():
-            if s in common:
-                common[s]+=1
-            else:
-                common[s] = 1
-        for s in s2.split():
-            if s in common:
-                common[s]+=1
-            else:
-                common[s] = 1
+        h1, h2 = Counter(s1.split()), Counter(s2.split())
         ans = []
-        for entry in common:
-            if common[entry] == 1:
-                ans.append(entry)
-        return ans        
+        for x in h1:
+            if h1[x]==1:
+                if x not in h2:
+                    ans.append(x)
+        for x in h2:
+            if h2[x]==1:
+                if x not in h1:
+                    ans.append(x)
+        return ans
