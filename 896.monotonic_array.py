@@ -33,19 +33,19 @@ Constraints:
 """
 class Solution:
     def isMonotonic(self, nums: List[int]) -> bool:
-        inc, dec = -1, -1
-        if len(nums) == 1:
-            return True
-        for i in range(len(nums)-1):
-            if inc == -1:
-                if nums[i] < nums[i+1]:
-                    inc, dec = 1, 0
-                if nums[i] > nums[i+1]:
-                    inc, dec = 0, 1
-            if inc == 1:
-                if nums[i] > nums[i+1]:
-                    return False
-            if dec == 1:
-                if nums[i] < nums[i+1]:
-                    return False
+        tone = 0
+        valid = True
+        for i in range(1,len(nums)):
+            #print(nums[i])
+            if nums[i]!=nums[i-1] and tone ==0:
+                #print('setting tone')
+                if nums[i]<nums[i-1]:
+                    tone = -1
+                else:
+                    tone = 1
+                #print('tone: ', tone)
+            elif tone==1 and nums[i]<nums[i-1]:
+                return False
+            elif tone==-1 and nums[i]>nums[i-1]:
+                return False
         return True
