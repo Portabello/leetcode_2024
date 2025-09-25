@@ -35,25 +35,18 @@ Constraints:
 #         self.right = right
 class Solution:
     def increasingBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        vals = []
-        def rc(root):
-            if root == None:
+        tree = []
+        def traverse(node):
+            if not node:
                 return
-            vals.append(root.val)
-            rc(root.left)
-            rc(root.right)
-        rc(root)
-        vals.sort()
-        #print(vals)
-        new = None
-        ptr = None
-        while len(vals)>0:
-            if new == None:
-                new = TreeNode(vals.pop(0))
-                ptr = new
-            else:
-                ptr.right = TreeNode(vals.pop(0))
-                ptr = ptr.right
-            #vals.pop(0)
-        return new
-        
+            traverse(node.left)
+            tree.append(node.val)
+            traverse(node.right)
+        traverse(root)
+        #print(tree)
+        ans = TreeNode(tree.pop(0))
+        cur = ans
+        while tree:
+            cur.right = TreeNode(tree.pop(0))
+            cur = cur.right
+        return ans
