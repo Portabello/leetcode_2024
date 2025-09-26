@@ -44,24 +44,7 @@ Constraints:
 '''
 class Solution:
     def smallestRangeI(self, nums: List[int], k: int) -> int:
-        average = sum(nums)/len(nums)
-        #for i in range(len(nums)):
-        #    if nums[i] < average:
-        #        nums[i] = nums[i] + k
-        #    else:
-        #        nums[i] = nums[i] - k
-        minnum, maxnum = None,None
-        for i in range(len(nums)):
-            if minnum == None:
-                minnum = nums[i]
-            if maxnum == None:
-                maxnum = nums[i]
-            if nums[i] < minnum:
-                minnum = nums[i]
-            if nums[i] > maxnum:
-                maxnum = nums[i]
-        #print(maxnum, minnum)
-        if maxnum - k >= minnum + k:
-            return (maxnum - k)-(minnum + k)
-        else:
+        delta = max(nums) - min(nums)
+        if delta <= k*2:
             return 0
+        return delta - k*2
