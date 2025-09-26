@@ -11,7 +11,7 @@ All the characters that are not English letters remain in the same position.
 All the English letters (lowercase or uppercase) should be reversed.
 Return s after reversing it.
 
- 
+
 
 Example 1:
 
@@ -25,7 +25,7 @@ Example 3:
 
 Input: s = "Test1ng-Leet=code-Q!"
 Output: "Qedo1ct-eeLg=ntse-T!"
- 
+
 
 Constraints:
 
@@ -35,16 +35,14 @@ s does not contain '\"' or '\\'.
 """
 class Solution:
     def reverseOnlyLetters(self, s: str) -> str:
-        letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        letters_in_s = []
-        for x in s:
-            if x in letters:
-                letters_in_s.append(x)
-        letters_in_s.reverse()
-        rev_index = 0
-        s = list(s)
-        for i,x in enumerate(s):
-            if x in letters:
-                s[i] = letters_in_s[rev_index]
-                rev_index += 1 
-        return "".join(s)
+        alpha = []
+        for c in s:
+            if c.isalpha():
+                alpha.append(c)
+        ans = ""
+        for c in s:
+            if c.isalpha():
+                ans = ans + alpha.pop(-1)
+            else:
+                ans = ans + c
+        return ans
