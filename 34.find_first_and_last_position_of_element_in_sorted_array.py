@@ -40,38 +40,41 @@ Constraints:
 '''
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        l,r = 0,len(nums)-1
-        mid = int((l+r)/2)
-        lmost = None
+        l,r=0,len(nums)-1
+        lowerbound = -1
         while l<=r:
-            if nums[mid]==target:
-                if lmost == None or mid<lmost:
-                    lmost = mid
-                r = mid-1
-                mid = int((l+r)/2)
-            elif nums[mid]>target:
-                r = mid-1
-                mid = int((l+r)/2)
+            m=(l+r)//2
+            if nums[m]==target:
+                if m==0:
+                    lowerbound=0
+                    break
+                if nums[m-1]==target:
+                    r=m-1
+                else:
+                    lowerbound=m
+                    break
+            elif nums[m]<target:
+                l=m+1
             else:
-                l = mid+1
-                mid = int((l+r)/2)
-        #print(lmost)
-        if lmost == None:
-            return [-1,-1]
-        l,r = 0,len(nums)-1
-        mid = int((l+r)/2)
-        rmost = None
+                r=m-1
+
+        l,r=0,len(nums)-1
+        upperbound = -1
         while l<=r:
-            if nums[mid]==target:
-                if rmost == None or mid>rmost:
-                    rmost = mid
-                l = mid+1
-                mid = int((l+r)/2)
-            elif nums[mid]>target:
-                r = mid-1
-                mid = int((l+r)/2)
+            m=(l+r)//2
+            if nums[m]==target:
+                if m==len(nums)-1:
+                    upperbound=m
+                    break
+                if nums[m+1]==target:
+                    l=m+1
+                else:
+                    upperbound=m
+                    break
+            elif nums[m]<target:
+                l=m+1
             else:
-                l = mid+1
-                mid = int((l+r)/2)
-        #print(rmost)
-        return [lmost,rmost]
+                r=m-1
+        #print('lowerbound', lowerbound)
+        #print('upperbound', upperbound)
+        return [lowerbound, upperbound]
