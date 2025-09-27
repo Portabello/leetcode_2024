@@ -33,14 +33,13 @@ digits[i] is a digit in the range ['2', '9'].
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         mapping = {2:'abc', 3:'def', 4:'ghi', 5:'jkl', 6:'mno', 7:'pqrs', 8:'tuv', 9:'wxyz'}
-        ans = []
-        if digits == "":
-            return []
-        def recurse(num, cur_combination):
-            if len(num)==0:
-                ans.append(cur_combination)
+        all_combinations = []
+        def recurse(digits, cur_combination):
+            if digits=="":
+                if cur_combination:
+                    all_combinations.append(cur_combination)
                 return
-            for c in mapping[int(num[0])]:
-                recurse(num[1:], cur_combination+c)
+            for x in mapping[int(digits[0])]:
+                recurse(digits[1:], cur_combination+x)
         recurse(digits, "")
-        return ans
+        return all_combinations
