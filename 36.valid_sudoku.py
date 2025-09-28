@@ -58,42 +58,42 @@ Constraints:
 '''
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        def check_sub_box_valid(x,y,board):
-            already_seen = []
+        def valid_box(board, x, y):
+            seen = set()
             for i in range(x,x+3):
                 for j in range(y,y+3):
-                    if board[i][j] in already_seen and board[i][j] != ".":
+                    if board[i][j] in seen and board[i][j] != '.':
                         return False
-                    already_seen.append(board[i][j])
+                    seen.add(board[i][j])
             return True
-        def check_column_valid(j,board):
-            already_seen = []
-            for i in range(9):
-                if board[i][j] in already_seen and board[i][j] != ".":
+
+        def valid_row(board, x):
+            seen = set()
+            for j in range(0,9):
+                if board[x][j] in seen and board[x][j] != '.':
                     return False
-                already_seen.append(board[i][j])
+                seen.add(board[x][j])
             return True
-        def check_row_valid(i,board):
-            already_seen = []
-            for j in range(9):
-                if board[i][j] in already_seen and board[i][j] != ".":
+
+        def valid_col(board, y):
+            seen = set()
+            for i in range(0,9):
+                if board[i][y] in seen and board[i][y] != '.':
                     return False
-                already_seen.append(board[i][j])
+                seen.add(board[i][y])
             return True
-        sub_box_origins = [[0,0], [0,3], [0,6], [3,0], [3,3], [3,6], [6,0], [6,3], [6,6]]
-        #check columns
-        for j in range(9):
-            if check_column_valid(j, board) == False:
-                #print('invalid column found at ', j)
+
+        sub_boxes = [(0,0), (0,3), (0,6), (3,0), (3,3), (3,6), (6,0), (6,3), (6,6)]
+        for box in sub_boxes:
+            if not valid_box(board, box[0], box[1]):
+                print('invalid subbox ', box)
                 return False
-        #check roww
-        for i in range(9):
-            if check_row_valid(i, board) == False:
-                #print('invalid row found at ', i)
+        for row in range(0,9):
+            if not valid_row(board, row):
+                print('invalid row ', row)
                 return False
-        #check sub boxes
-        for box in sub_box_origins:
-            if check_sub_box_valid(box[0], box[1], board) == False:
-                #print('invalid subbox found at ', box)
+        for col in range(0,9):
+            if not valid_col(board, col):
+                print('invalid col ', col)
                 return False
         return True
