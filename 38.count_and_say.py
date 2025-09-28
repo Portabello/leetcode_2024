@@ -52,28 +52,21 @@ Follow up: Could you solve it iteratively?
 class Solution:
     def countAndSay(self, n: int) -> str:
         ans = "1"
-        for i in range(2,n+1):
-            ans = self.RLE(ans)
-            #print(ans)
-        return ans
-
-    def RLE(self, n):
-        last = None
-        last_count = 0
-        freq = []
-        for x in str(n):
-            if last == None:
-                last = x
-                last_count+=1
-            elif last != x:
-                freq.append([last_count,last])
-                last = x
-                last_count = 1
-            elif last == x:
-                last_count += 1
-        freq.append([last_count,last])
-        #print(freq)
-        ans = ""
-        for x in freq:
-            ans = ans + str(x[0]) + str(x[1])
+        for x in range(1,n):
+            last = None
+            new_ans = ""
+            cur_len = 0
+            for i,x in enumerate(ans):
+                if last==None:
+                    last = x
+                    cur_len+=1
+                elif x!=last:
+                    new_ans = new_ans + str(cur_len) + last
+                    cur_len=1
+                    last = x
+                elif x==last:
+                    cur_len += 1
+                if i == len(ans)-1:
+                        new_ans = new_ans + str(cur_len) + last
+            ans = new_ans
         return ans
