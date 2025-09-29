@@ -6,7 +6,7 @@ Topics
 Companies
 Given an integer array nums, return the largest perimeter of a triangle with a non-zero area, formed from three of these lengths. If it is impossible to form any triangle of a non-zero area, return 0.
 
- 
+
 
 Example 1:
 
@@ -17,12 +17,12 @@ Example 2:
 
 Input: nums = [1,2,1,10]
 Output: 0
-Explanation: 
+Explanation:
 You cannot use the side lengths 1, 1, and 2 to form a triangle.
 You cannot use the side lengths 1, 1, and 10 to form a triangle.
 You cannot use the side lengths 1, 2, and 10 to form a triangle.
 As we cannot use any three side lengths to form a triangle of non-zero area, we return 0.
- 
+
 
 Constraints:
 
@@ -32,12 +32,11 @@ Constraints:
 class Solution:
     def largestPerimeter(self, nums: List[int]) -> int:
         nums.sort()
-        nums.reverse()
-        print(nums)
-        for i in range(len(nums)-2):
-            a = nums[i]
-            b = nums[i+1]
-            c = nums[i+2]
-            if a < b+c:
-                return a+b+c
+        def is_valid_triangle(arr):
+            if arr[0]+arr[1]>arr[2] and arr[0]+arr[2]>arr[1] and arr[1]+arr[2]>arr[0]:
+                return True
+            return False
+        for i in range(len(nums)-3, -1, -1):
+            if is_valid_triangle(nums[i:i+3]):
+                return sum(nums[i:i+3])
         return 0
