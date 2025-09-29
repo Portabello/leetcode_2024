@@ -46,30 +46,17 @@ Constraints:
 '''
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        res = []
-        def rc(t, t_sum):
-            if t_sum == target:
-                #print('found combination sum! ', t)
-                res.append(t)
+        all_combinations = []
+        def traverse(cur_combination):
+            if sum(cur_combination) == target:
+                cur_combination.sort()
+                if cur_combination not in all_combinations:
+                    all_combinations.append(cur_combination)
                 return
-            if t_sum > target:
+            elif sum(cur_combination)>target:
                 return
-            for i in range(len(candidates)):
-                new_t = t + [i]
-                new_sum = t_sum + candidates[i]
-                rc(new_t, new_sum)
-        rc([],0)
-        #print(res)
-        ans = []
-        for x in res:
-            x.sort()
-            if x not in ans:
-                ans.append(x)
-        #print(ans)
-        final_ans = []
-        for x in ans:
-            t = []
-            for y in x:
-                t.append(candidates[y])
-            final_ans.append(t)
-        return final_ans
+            for x in candidates:
+                traverse(cur_combination+[x])
+        traverse([])
+        #print(all_combinations)
+        return all_combinations
