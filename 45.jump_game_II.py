@@ -38,19 +38,11 @@ Constraints:
 '''
 class Solution:
     def jump(self, nums: List[int]) -> int:
-        curEndJump = 0
-        maxEndJump = 0
-        jumps = 0
-
-        for x in range(len(nums)-1):
-            maxEndJump = max(maxEndJump, x+nums[x])
-
-            if maxEndJump >= len(nums)-1:
-                jumps += 1
-                break
-
-            if x == curEndJump:
-                jumps += 1
-                curEndJump = maxEndJump
-
-        return jumps
+        ans = [0 for x in nums]
+        for i in range(len(nums)-2,-1,-1):
+            min_to_end = 9999999
+            for j in range(i, min(len(nums), i+nums[i]+1)):
+                if i!=j:
+                    min_to_end = min(min_to_end, ans[j]+1)
+            ans[i] = min_to_end
+        return ans[0]
