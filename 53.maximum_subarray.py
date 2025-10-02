@@ -4,11 +4,11 @@ Solved
 Medium
 Topics
 Companies
-Given an integer array nums, find the 
+Given an integer array nums, find the
 subarray
  with the largest sum, and return its sum.
 
- 
+
 
 Example 1:
 
@@ -25,7 +25,7 @@ Example 3:
 Input: nums = [5,4,-1,7,8]
 Output: 23
 Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
- 
+
 
 Constraints:
 
@@ -34,11 +34,11 @@ Constraints:
 """
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        maxsub = nums[0]
-        cursum = 0
+        total, res = 0,-999999999
         for x in nums:
-            if cursum<0:
-                cursum = 0
-            cursum += x
-            maxsub = max(cursum, maxsub)
-        return maxsub 
+            if x > total+x:
+                total = x
+            else:
+                total += x
+            res = max(res, total)
+        return res
