@@ -45,33 +45,16 @@ Constraints:
 '''
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        strs_hash_table = []
-        for x in strs:
-            h = {}
-            for c in x:
-                if c in h:
-                    h[c]+=1
-                else:
-                    h[c]=1
-            strs_hash_table.append([x,h])
-        #print(strs_hash_table)
+        hs = {}
+        for s in strs:
+            key = list(s[:])
+            key.sort()
+            key = ''.join(key)
+            if key not in hs:
+                hs[key] = [s]
+            else:
+                hs[key].append(s)
         ans = []
-        for x in strs_hash_table:
-            found = False
-            #check if hash matches a entry in ans
-            for i,y in enumerate(ans):
-                if y[0][1] == x[1]:
-                    ans[i].append(x)
-                    found= True
-                    break
-            #if not create a new entry
-            if found == False:
-                ans.append([x])
-        #print(ans)
-        res = []
-        for x in ans:
-            t = []
-            for y in x:
-                t.append(y[0])
-            res.append(t)
-        return res
+        for x in hs:
+            ans.append(hs[x])
+        return ans
