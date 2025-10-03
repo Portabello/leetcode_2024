@@ -33,13 +33,11 @@ Constraints:
 '''
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        t = [False for _ in range(len(nums))]
-        t[-1] = True
-        for i in range(len(nums)-1, -1, -1):
-            for y in range(i+1, min(len(nums), i+nums[i]+1)):
-                if t[y]==True:
-                    t[i]=True
-                    break
-        if t[0]==True:
-            return True
-        return False
+        t = nums[0]
+        for i,x in enumerate(nums):
+            t-=1
+            t=max(x, t)
+            if t==0 and i!=len(nums)-1:
+                return False
+        return True
+            
