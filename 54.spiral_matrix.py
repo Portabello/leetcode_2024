@@ -32,57 +32,40 @@ Constraints:
 '''
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
-
-        total_matrix_length = len(matrix)*len(matrix[0])
+        direction = 'right'
+        seen = set()
+        matrix_len = len(matrix[0])*len(matrix)
+        #print(matrix_len)
+        i,j=0,0
         ans = []
-
-
-        while not self.is_empty(matrix):
-            print('matrix - ',matrix)
-
-            end_found = False
-            #top side
-            for i in range(0,len(matrix[0])):
-                if matrix[0][i]==None:
-                    end_found = True
-                    break
-                ans.append(matrix[0][i])
-                print('top appending ', matrix[0][i])
-                matrix[0][i] = None
-            #right side
-            if end_found == False:
-                for i in range(1,len(matrix)):
-                    if matrix[i][len(matrix[0])-1]==None:
-                        end_found = True
-                        break
-                    ans.append(matrix[i][len(matrix[0])-1])
-                    print('right appending ', matrix[i][len(matrix[0])-1])
-                    matrix[i][len(matrix[0])-1] = None
-            #bottom side
-            if end_found == False:
-                for i in range(len(matrix[0])-2,-1,-1):
-                    if matrix[len(matrix)-1][i]==None:
-                        end_found = True
-                        break
-                    ans.append(matrix[len(matrix)-1][i])
-                    print('bottom appending ', matrix[len(matrix)-1][i])
-                    matrix[len(matrix)-1][i] = None
-            #left side
-            if end_found == False:
-                for i in range(len(matrix)-2,-1,-1):
-                    print(i)
-                    if matrix[i][0]==None:
-                        end_found = True
-                        break
-                    ans.append(matrix[i][0])
-                    print('left appending ', matrix[i][0])
-                    matrix[i][0] = None
-            print('ans - ', ans)
-            print('------------')
-            matrix = self.remove_perimeter(matrix)
+        while len(seen)<matrix_len:
+            #print(direction, i,j)
+            #print('seen', seen)
+            ans.append(matrix[i][j])
+            seen.add((i,j))
+            if direction=='right':
+                if j==len(matrix[0])-1 or (i,j+1) in seen:
+                    direction='down'
+                    i+=1
+                else:
+                    j+=1
+            elif direction=='down':
+                if i==len(matrix)-1 or (i+1,j) in seen:
+                    direction='left'
+                    j-=1
+                else:
+                    i+=1
+            elif direction=='left':
+                if j==0 or (i,j-1) in seen:
+                    direction='up'
+                    i-=1
+                else:
+                    j-=1
+            elif direction=='up':
+                if i==0 or (i-1,j) in seen:
+                    direction='right'
+                    j+=1
+                else:
+                    i-=1
+        #print(ans)
         return ans
-
-    def remove_perimeter(self, matrix):
-        return [row[1:-1] for row in matrix[1:-1]]
-    def is_empty(self,matrix):
-        return not matrix or not matrix[0]
