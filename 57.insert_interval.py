@@ -41,23 +41,21 @@ Constraints:
 '''
 class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-        merge_into = []
-        for x in intervals:
-            if (newInterval[0] >= x[0] and newInterval[0] <= x[1]) or (newInterval[1] >= x[0] and newInterval[1] <= x[1]) or (newInterval[0] <= x[0] and newInterval[1] >= x[1]):
-                #print('merge found! ', x)
-                merge_into.append(x)
-        for x in merge_into:
-            if x in intervals:
-                intervals.remove(x)
+        inserted=False
+        for i in range(len(intervals)):
+            if intervals[i][0]>=newInterval[0]:
+                intervals.insert(i, newInterval)
+        if not inserted:
+            intervals.append(newInterval)
         #print(intervals)
-        merge_into.append(newInterval)
-        min_val, max_val = float('inf'), -1
-        for x in merge_into:
-            for y in x:
-                min_val = min(min_val, y)
-                max_val = max(max_val, y)
-        inserted_interval = [min_val, max_val]
-        #print(inserted_interval)
-        intervals.append(inserted_interval)
+
         intervals.sort()
+        i=0
+        while i<len(intervals)-1:
+            #merge intervals
+            if intervals[i][1]>=intervals[i+1][0]:
+                intervals[i] = [min(intervals[i][0], intervals[i+1][0]), max(intervals[i][1], intervals[i+1][1])]
+                del intervals[i+1]
+            else:
+                i+=1
         return intervals
