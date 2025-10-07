@@ -33,39 +33,46 @@ Constraints:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution:
     def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-        if not head:
+        if head==None or k==0:
             return head
-        if k == 0:
+        if head.next==None:
             return head
-        if head.next == None:
+        list_length = 0
+        t=head
+        while t:
+            list_length+=1
+            t=t.next
+        print(list_length)
+        rotated_head = head
+        if (list_length - (k%list_length))==0:
             return head
-        length = 1
-        tail = head
-        while tail.next:
-            length += 1
-            tail = tail.next
-            print(tail.val)
-        print('L',length, 'tail', tail.val)
-        if k%length == 0:
+        for i in range(list_length - (k%list_length)):
+            rotated_head = rotated_head.next
+        print(rotated_head)
+        if rotated_head==None:
             return head
-        rotate_axis = length - (k%length)
-        print('rotate_axis', rotate_axis)
-        i = 1
-        tmp = head
-        new_head = None
-        while tmp.next:
-            if i == rotate_axis:
-                print('rotate found ', tmp.val)
-                new_head = tmp.next
-                tmp.next = None
+
+        last=None
+        second_half=head
+        for x in range(list_length):
+            if head==rotated_head:
+                print('found element', head)
+                last.next=None
+            last=head
+            head=head.next
+        print(second_half)
+
+        t=rotated_head
+        while True:
+            if t.next==None:
+                t.next=second_half
                 break
-            tmp = tmp.next
-            i+=1
-        print('----')
-        print(head)
-        print(new_head)
-        tail.next = head
-        print(new_head)
-        return new_head
+            t=t.next
+        return rotated_head
