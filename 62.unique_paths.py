@@ -27,7 +27,7 @@ Explanation: From the top-left corner, there are a total of 3 ways to reach the 
 2. Down -> Down -> Right
 3. Down -> Right -> Down
 
-
+|cffffffffTinterface/ICONS/Inv_holiday_beerfestsausage02:50:50:0:-1|cfffffffft
 
 Constraints:
 
@@ -35,19 +35,18 @@ Constraints:
 
 '''
 class Solution:
+    # O(mn)
     def uniquePaths(self, m: int, n: int) -> int:
-
-        memo = {(m-1,n-1):1}
-        def rec(m,n,x,y):
-            if (x,y) in memo:
-                return memo[(x,y)]
-            elif x==m-1 and y==n-1:
-                return 1
-            elif x>=m or y>=n:
-                return 0
-            val =  rec(m,n,x+1,y) + rec(m,n,x,y+1)
-            memo[(x,y)] = val
-            return val
-
-        return rec(m,n,0,0)
-            
+        table = [[0 for x in range(n)] for y in range(m)]
+        table[0][0]=1
+        for i in range(m):
+            for j in range(n):
+                if i==0 and j==0:
+                    continue
+                t=0
+                if i!=0:
+                    t+=table[i-1][j]
+                if j!=0:
+                    t+=table[i][j-1]
+                table[i][j]=t
+        return table[m-1][n-1]
