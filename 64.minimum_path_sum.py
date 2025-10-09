@@ -33,20 +33,17 @@ Constraints:
 '''
 class Solution:
     def minPathSum(self, grid: List[List[int]]) -> int:
-        mincost = grid[::]
-        #row
+        ans = [[0 for x in range(len(grid[0]))] for y in range(len(grid))]
         for i in range(len(grid)):
-            #col
             for j in range(len(grid[0])):
                 if i==0 and j==0:
-                    mincost[0][0] = grid[i][j]
-                #top row
-                elif i==0:
-                    mincost[i][j] = mincost[i][j-1] + grid[i][j]
-                #left col
-                elif j==0:
-                    mincost[i][j] = mincost[i-1][j] + grid[i][j]
-                else:
-                    mincost[i][j] = min(mincost[i-1][j], mincost[i][j-1]) + grid[i][j]
-        #print(mincost)
-        return mincost[len(grid)-1][len(grid[0])-1]
+                    ans[i][j]=grid[i][j]
+                    continue
+                t=99999999
+                if i!=0:
+                    t=min(ans[i-1][j], t)
+                if j!=0:
+                    t=min(ans[i][j-1], t)
+                ans[i][j] = t + grid[i][j]
+        #print(ans)
+        return ans[len(grid)-1][len(grid[0])-1]
