@@ -45,20 +45,21 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        # determine all rows and cols that must be modified
-        rows = set()
-        cols = set()
+        zerod_cols, zerod_rows = set(), set()
+        def zero_col(col, matrix):
+            for j in range(len(matrix[0])):
+                matrix[col][j]=0
+        def zero_row(row, matrix):
+            for i in range(len(matrix)):
+                matrix[i][row]=0
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
-                if matrix[i][j] == 0:
-                    rows.add(i)
-                    cols.add(j)
-        #print('rows: ', rows)
-        #print('cols: ', cols)
-
-        for i in range(len(matrix)):
-            for j in range(len(matrix[0])):
-                if i in rows or j in cols:
-                    matrix[i][j] = 0
-        return matrix
+                if matrix[i][j]==0:
+                    zerod_cols.add(i)
+                    zerod_rows.add(j)
+        print(zerod_cols, zerod_rows)
+        for i in zerod_cols:
+            zero_col(i, matrix)
+        for j in zerod_rows:
+            zero_row(j, matrix)
         
