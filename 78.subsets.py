@@ -34,16 +34,14 @@ Constraints:
 '''
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        res = []
-        subset = []
-        def create_subset(i):
-            if i==len(nums):
-                res.append(subset[:])
-                return
-            subset.append(nums[i])
-            create_subset(i+1)
-            subset.pop()
-            create_subset(i+1)
-
-        create_subset(0)
-        return res
+        ans = set()
+        def recurse(cur, nums):
+            cur.sort()
+            ans.add(tuple(cur))
+            for i,x in enumerate(nums):
+                recurse(cur+[x], nums[:i]+nums[i+1:])
+        recurse([], nums)
+        ret = []
+        for x in ans:
+            ret.append(list(x))
+        return ret
