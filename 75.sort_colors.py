@@ -41,22 +41,15 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        zeros, ones, twos = 0,0,0
-        for x in nums:
-            if x==0:
-                zeros += 1
-            elif x==1:
-                ones += 1
-            elif x==2:
-                twos += 1
-        for i in range(len(nums)):
-            if zeros != 0:
-                nums[i]=0
-                zeros -= 1
-            elif ones != 0:
-                nums[i]=1
-                ones -= 1
-            elif twos != 0:
-                nums[i]=2
-                twos -= 1
-        return nums
+        l,m,h = 0, 0, len(nums)-1
+        while m<=h:
+            if nums[m]==0:
+                nums[m], nums[l] = nums[l], nums[m]
+                l+=1
+                m+=1
+            elif nums[m]==1:
+                m+=1
+            else:
+                nums[m], nums[h] = nums[h], nums[m]
+                h-=1
+        
