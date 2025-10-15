@@ -34,6 +34,7 @@ Constraints:
 '''
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
+        '''
         ans = set()
         def recurse(cur, nums):
             cur.sort()
@@ -45,3 +46,13 @@ class Solution:
         for x in ans:
             ret.append(list(x))
         return ret
+        '''
+        ans = []
+        def recurse(cur, i):
+            if i==len(nums):
+                ans.append(cur)
+                return
+            recurse(cur, i+1)
+            recurse(cur+[nums[i]], i+1)
+        recurse([], 0)
+        return ans
