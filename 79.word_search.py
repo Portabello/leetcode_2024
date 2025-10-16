@@ -42,48 +42,33 @@ Follow up: Could you use search pruning to make your solution faster with a larg
 '''
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        ans = [0]
-        #visited = []
-        #given starting position of target word, recursively see if full word can be found
-        def wordSearch(i, j, k, visited):
-            #look up,down,left,right of [i,j]
-            #print(i,j,k,ans, visited)
-            new_visited = visited[:]
-            new_visited.append([i,j])
-            if k == len(word):
-                ans[0]+=1
+        ans=[False]
+        def recurse(i,j,visited, index):
+            if index==len(word)-1:
+                ans[0]=True
                 return
-            if i != 0:
-                #up
-                if board[i-1][j] == word[k]:
-                    if [i-1,j] not in new_visited:
-                        wordSearch(i-1,j, k+1, new_visited)
-            if i != len(board)-1:
-                #down
-                if board[i+1][j] == word[k]:
-                    if [i+1,j] not in new_visited:
-                        wordSearch(i+1,j, k+1, new_visited)
-            if j != 0:
-                #left
-                if board[i][j-1] == word[k]:
-                    if [i,j-1] not in new_visited:
-                        wordSearch(i,j-1, k+1, new_visited)
-            if j != len(board[0])-1:
-                #right
-                if board[i][j+1] == word[k]:
-                    if [i,j+1] not in new_visited:
-                        wordSearch(i,j+1, k+1, new_visited)
+            #board[i][j]='.'
+            #top
+            if i!=0:
+                if board[i-1][j]==word[index+1] and (i-1,j) not in visited:
+                    recurse(i-1, j,visited+[(i-1,j)], index+1)
+            #bottom
+            if i!=len(board)-1:
+                if board[i+1][j]==word[index+1] and (i+1,j) not in visited:
+                    recurse(i+1, j,visited+[(i+1,j)], index+1)
+            #right
+            if j!=len(board[0])-1:
+                if board[i][j+1]==word[index+1] and (i,j+1) not in visited:
+                    recurse(i, j+1,visited+[(i,j+1)], index+1)
+            #left
+            if j!=0:
+                if board[i][j-1]==word[index+1] and (i,j-1) not in visited:
+                    recurse(i, j-1,visited+[(i,j-1)], index+1)
 
-        #find all occurances of the first letter of target in board
         for i in range(len(board)):
             for j in range(len(board[0])):
-                if board[i][j] == word[0]:
-                    #send to helper function wordSearch
-                    #visited.append([i,j])
-                    #print('newsearch')
-                    wordSearch(i,j,1, [])
-                    #visited = []
-        #print(visited)
-        if ans[0]>0:
-            return True
+                if board[i][j]==word[0]:
+                    recurse(i,j,[(i,j)], 0)
+                if ans[0]==True:
+                    return True
         return False
