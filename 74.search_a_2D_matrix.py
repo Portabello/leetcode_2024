@@ -38,37 +38,18 @@ Constraints:
 '''
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        # binary search for row
-        def binarySearchRow(matrix, target):
-            l,r = 0,len(matrix)-1
-            while l<=r:
-                m = (l+r)//2
-                if target >= matrix[m][0] and target <= matrix[m][len(matrix[0])-1]:
-                    return m
-                elif target > matrix[m][len(matrix[0])-1]:
-                    l = m+1
-                else:
-                    r = m-1
-            return -1
-        target_row = binarySearchRow(matrix, target)
-        #print(target_row)
-        if target_row == -1:
-            return False
-        # binary search for col
-        def binarySearchColumn(row, target):
-            l,r = 0,len(row)
-            while l<=r:
-                m = (l+r)//2
-                if row[m] == target:
-                    return m
-                elif target < row[m]:
-                    r = m-1
-                else:
-                    l = m+1
-            return -1
+        l,r=0,(len(matrix)*len(matrix[0]))-1
 
-        target_col = binarySearchColumn(matrix[target_row], target)
-        #print(target_col)
-        if target_col == -1:
-            return False
-        return True
+        while l<=r:
+            m=(l+r)//2
+            #print('row',m//len(matrix[0]))
+            #print('col',m-(m//len(matrix[0])*len(matrix[0])))
+            value = matrix[m//len(matrix[0])][m-(m//len(matrix[0])*len(matrix[0]))]
+            #print('value ', value)
+            if value==target:
+                return True
+            if value<target:
+                l+=1
+            else:
+                r-=1
+        return False
