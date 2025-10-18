@@ -56,23 +56,26 @@ Constraints:
 '''
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        hs = {}
-        k = 0
+        element, count = None, None
+        backindex = len(nums)-1
+        k=len(nums)
         i=0
-        counter = 0
-        while counter<len(nums):
-            x = nums[i]
-            if x in hs:
-                if hs[x] == 2:
-                    t = nums.pop(i)
-                    nums.append(t)
-                    k+=1
-                    i-=1
-                else:
-                    hs[x]+=1
+        while i<len(nums):
+            if i==0:
+                element=nums[i]
+                count=1
             else:
-                hs[x]=1
+                if nums[i]==element:
+                    count+=1
+                    if count>2:
+                        nums.append(nums.pop(i))
+                        k-=1
+                        i-=1
+                else:
+                    element=nums[i]
+                    count=1
+            if i+1==k:
+                break
+            #print(element, count, nums, k, i)
             i+=1
-            counter += 1
-        #print(nums)
-        return len(nums)-k
+        return k
