@@ -49,29 +49,20 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
-        ans = []
-        def rc(head):
-            if head:
-                ans.append(head.val)
-                rc(head.left)
-                rc(head.right)
-
-        rc(root)
-        #print(ans)
-        head = None
-        LL = None
-        prev = None
-        for x in ans:
-            if head == None:
-                head = TreeNode(x)
-                LL = head
-                prev = head
-            else:
-                prev.right = TreeNode(x)
-                prev.left = None
-                prev = prev.right
-        #print(head)
-        if ans:
-            root.val = ans[0]
-            root.right = head.right
-            root.left = None
+        tree = []
+        def r(node):
+            if not node:
+                return
+            tree.append(node.val)
+            r(node.left)
+            r(node.right)
+        r(root)
+        if len(tree)==0:
+            return None
+        cur = root
+        for i,x in enumerate(tree):
+            cur.val = x
+            cur.left = None
+            if i!=len(tree)-1:
+                cur.right = TreeNode()
+                cur = cur.right
