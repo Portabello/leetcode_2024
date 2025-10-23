@@ -42,14 +42,24 @@ Follow up: Could you do this using only O(n) extra space, where n is the total n
 
 class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
-        #memo = {}
-        def bt(triangle,x,y,ans,memo):
-            if x>=len(triangle):
-                return ans
-            if (x,y) in memo:
-                return memo[(x,y)]
-            ans += triangle[x][y] + min(bt(triangle, x+1, y, ans, memo), bt(triangle, x+1, y+1, ans, memo))
-            memo[(x,y)] = ans
-            return ans
-
-        return bt(triangle,0,0,0,{})
+        '''
+        min_path = [float(inf)]
+        def recurse(i, row, cursum):
+            cursum += triangle[row][i]
+            if row == len(triangle)-1:
+                min_path[0] = min(cursum, min_path[0])
+                return
+            recurse(i, row+1, cursum)
+            recurse(i+1, row+1, cursum)
+        recurse(0, 0, 0)
+        return min_path[0]
+        '''
+        dp = [row[:] for row in triangle]
+        #print(dp)
+        for i,row in enumerate(triangle):
+            if i!=0:
+                for x in range(len(row)):
+                    #print("dp[",i,"][",x,"] = ", dp[i-1][max(0,x-1)], ' - ', dp[i-1][min(x, len(dp[i-1])-1)])
+                    dp[i][x] = dp[i][x] + min(dp[i-1][max(0,x-1)], dp[i-1][min(x, len(dp[i-1])-1)])
+        #print(dp)
+        return min(dp[-1])
