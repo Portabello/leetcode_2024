@@ -42,29 +42,26 @@ Constraints:
 #         self.val = val
 #         self.left = left
 #         self.right = right
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        ans = [1]
-        def rc(root, l, r, parents):
-            if root == None:
-                #print('end reached, returning')
+        valid = [True]
+        def recurse(node, left_bound, right_bound, side):
+            #root node
+            #if parent==None and side == None:
+            if not node:
                 return
-
-            #print('examining node: ', root.val, ' to its parents ')
-            for parent, side in parents:
-                #print('looking at parent...', parent.val, 'from side', side)
-                if side == 'L':
-                    if root.val >= parent.val:
-                        ans[0] = 0
-                elif side == 'R':
-                    if root.val <= parent.val:
-                        ans[0] = 0
-
-            new_parents = parents + [(root, 'L')]
-            rc(root.left, True, False, new_parents)
-            new_parents = parents + [(root, 'R')]
-            rc(root.right, False, True, new_parents)
-        rc(root, False, False, [])
-        if ans[0]:
-            return True
-        return False
+            if not (left_bound < node.val < right_bound):
+                valid[0]=False
+                return
+            if node.left:
+                recurse(node.left, left_bound, min(node.val, right_bound), 'left')
+            if node.right:
+                recurse(node.right, max(left_bound, node.val), right_bound, 'right')
+        recurse(root, -float(inf), float(inf), None)
+        return valid[0]
