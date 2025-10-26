@@ -37,6 +37,7 @@ Constraints:
     -104 <= triangle[i][j] <= 104
 
 
+
 Follow up: Could you do this using only O(n) extra space, where n is the total number of rows in the triangle?
 '''
 
