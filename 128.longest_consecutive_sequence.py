@@ -32,12 +32,14 @@ Constraints:
 '''
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        hs = set(nums)
+        counter = set(nums)
         longest = 0
-        for n in nums:
-            if n-1 not in hs:
-                length = 1
-                while n + length in hs:
-                    length += 1
-                longest = max(longest, length)
+        for x in counter:
+            if x-1 not in counter:
+                cur_len = 1
+                cur = x
+                while cur+1 in counter:
+                    cur_len += 1
+                    cur = cur+1
+                longest = max(longest, cur_len)
         return longest
