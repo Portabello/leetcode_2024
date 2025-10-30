@@ -53,18 +53,14 @@ Constraints:
 #         self.right = right
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
-        res = []
-        def rc(root, num):
-            new_num = num + str(root.val)
-            if root.left:
-                rc(root.left, new_num)
-            if root.right:
-                rc(root.right, new_num)
-            if not root.left and not root.right:
-                res.append(new_num)
-                return
-        rc(root, "")
-        sum_root_to_leaf = 0
-        for x in res:
-            sum_root_to_leaf += int(x)
-        return sum_root_to_leaf
+        ans = [0]
+        def traverse(node, cur_path):
+            cur_path = cur_path + str(node.val)
+            if not node.left and not node.right:
+                ans[0] += int(cur_path)
+            if node.left:
+                traverse(node.left, cur_path)
+            if node.right:
+                traverse(node.right, cur_path)
+        traverse(root, "")
+        return ans[0]
