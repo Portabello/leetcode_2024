@@ -33,16 +33,17 @@ Constraints:
 '''
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        res =[]
-        def bt(s, r):
-            if len(s)==0:
-                res.append(r)
+        ans = []
+        def recurse(cur_partition, remaining):
+            #print(cur_partition, remaining)
+            if len(remaining)==0:
+                ans.append(cur_partition)
                 return
-            for l in range(1,len(s)+1):
-                t = s[0:l]
-                #print(l,t)
-                if t == t[::-1]:
-                    new_r = r + [t]
-                    bt(s[l:], new_r)
-        bt(s, [])
-        return res
+            for i in range(1, len(remaining)+1):
+                substring = remaining[0:i]
+                #print('checking substring ', substring)
+                if substring==substring[::-1]:
+                    recurse(cur_partition+[substring], remaining[i:])
+        recurse([], s)
+        #print('ans', ans)
+        return ans
