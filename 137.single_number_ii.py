@@ -8,7 +8,7 @@ Given an integer array nums where every element appears three times except for o
 
 You must implement a solution with a linear runtime complexity and use only constant extra space.
 
- 
+
 
 Example 1:
 
@@ -18,7 +18,7 @@ Example 2:
 
 Input: nums = [0,1,0,1,0,1,99]
 Output: 99
- 
+
 
 Constraints:
 
@@ -28,12 +28,13 @@ Each element in nums appears exactly three times except for one element which ap
 """
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        number_hash = {}
+        hs = {}
         for x in nums:
-            if x in number_hash:
-                number_hash[x]+=1
+            if x in hs and hs[x]==2:
+                del hs[x]
+            elif x not in hs:
+                hs[x]=1
             else:
-                number_hash[x]=1
-        for key,val in number_hash.items():
-            if val==1:
-                return key
+                hs[x]+=1
+        for x in hs:
+            return x
