@@ -54,26 +54,21 @@ Constraints:
 '''
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
-        stack = []
+        operands = []
         for x in tokens:
-            #print(stack)
-            if x in '+-*/':
-                if len(stack) < 2:
-                    print('error operand found with stack len < 2')
-                else:
-                    num1 = stack.pop()
-                    num2 = stack.pop()
-                    #stack.append('(' + num2 + x + num1 + ')')
-                    if x == '+':
-                        stack.append(num2+num1)
-                    elif x == '-':
-                        stack.append(num2-num1)
-                    elif x == '*':
-                        stack.append(num2*num1)
-                    elif x == '/':
-                        stack.append(int(num2/num1))
+            if x.lstrip('-').isdigit():
+                #print('digit', x)
+                operands.append(x)
             else:
-                #stack.append(str(x))
-                stack.append(int(x))
-        print(stack)
-        return stack[0]
+                #print('operator', x)
+                op1 = operands.pop(-1)
+                op2 = operands.pop(-1)
+                if x=='+':
+                    operands.append(int(op1)+int(op2))
+                if x=='-':
+                    operands.append(int(op2)-int(op1))
+                if x=='*':
+                    operands.append(int(op1)*int(op2))
+                if x=='/':
+                    operands.append(int(op2)/int(op1))
+        return int(operands[0])
