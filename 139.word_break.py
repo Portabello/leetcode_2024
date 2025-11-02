@@ -42,20 +42,15 @@ Constraints:
 '''
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        ans = [0]
-
-        def rc(s, memo):
-            if len(s) == 0:
-                ans[0] = 1
+        ans=[False]
+        def recurse(remaining):
+            if ans[0]==True:
                 return
-            if s in memo:
-                return memo[s]
-            for word in wordDict:
-                if word == s[0:len(word)]:
-                    #print('matched', word, ' to ', s)
-                    x =  rc(s[len(word):], memo)
-                    memo[s] = x
-        rc(s, {})
-        if ans[0]==1:
-            return True
-        return False
+            if len(remaining)==0:
+                ans[0]=True
+                return
+            for i in range(1,len(remaining)+1):
+                if remaining[0:i] in wordDict:
+                    recurse(remaining[i:])
+        recurse(s)
+        return ans[0]
