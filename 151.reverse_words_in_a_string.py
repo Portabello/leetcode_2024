@@ -47,6 +47,4 @@ Follow-up: If the string data type is mutable in your language, can you solve it
 '''
 class Solution:
     def reverseWords(self, s: str) -> str:
-        slist = s.split()
-        slist.reverse()
-        return " ".join(slist)
+        return " ".join(s.split()[::-1])
