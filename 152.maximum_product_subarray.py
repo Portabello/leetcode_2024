@@ -4,13 +4,13 @@ Solved
 Medium
 Topics
 Companies
-Given an integer array nums, find a 
+Given an integer array nums, find a
 subarray
  that has the largest product, and return the product.
 
 The test cases are generated so that the answer will fit in a 32-bit integer.
 
- 
+
 
 Example 1:
 
@@ -22,7 +22,7 @@ Example 2:
 Input: nums = [-2,0,-1]
 Output: 0
 Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
- 
+
 
 Constraints:
 
@@ -30,16 +30,13 @@ Constraints:
 -10 <= nums[i] <= 10
 The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
 """
+import math
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
-        ans = max(nums)
-        curmin, curmax = 1,1
-        for n in nums:
-            if n==0:
-                curmin,curmax = 1,1
-                continue
-            tmp = curmax*n
-            curmax = max(n*curmax, n*curmin, n)
-            curmin = min(tmp, n*curmin, n)
-            ans = max(ans, curmax, curmin)
-        return ans
+        max_prod = max(nums)
+        for l in range(1,len(nums)):
+            #print('subarr len: ', l)
+            for i in range(len(nums)-l+1):
+                #print(nums[i:i+l])
+                max_prod = max(max_prod, math.prod(nums[i:i+l]))
+        return max_prod
