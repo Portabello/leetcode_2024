@@ -48,28 +48,22 @@ Constraints:
     At most 3 * 104 calls will be made to push, pop, top, and getMin.
 
 '''
-from collections import deque
 class MinStack:
 
     def __init__(self):
-        self.queue = deque()
+        self.stack = []
 
     def push(self, val: int) -> None:
-        self.queue.append(val)
-
+        self.stack.append(val)
 
     def pop(self) -> None:
-        self.queue.pop()
-
+        self.stack.pop()
 
     def top(self) -> int:
-        return self.queue[-1]
+        return self.stack[-1]
 
     def getMin(self) -> int:
-        min_val = float('inf')
-        for x in self.queue:
-            min_val = min(min_val, x)
-        return min_val
+        return min(self.stack)
 
 
 # Your MinStack object will be instantiated and called as such:
