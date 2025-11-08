@@ -38,36 +38,11 @@ Constraints:
 '''
 class Solution:
     def findPeakElement(self, nums: List[int]) -> int:
-        # linear solution O(n)
-        '''
-        if len(nums) <=2:
-            return nums.index(max(nums))
-        prevprev, prev = nums[0], nums[1]
-        for i in range(2,len(nums)):
-            cur = nums[i]
-            if prevprev < prev and cur < prev:
-                return i-1
-            prevprev = prev
-            prev = cur
-        if nums[-1]>nums[0]:
-            return len(nums)-1
-        return 0
-        '''
-        # log n solution O(log n)
-        if len(nums) <=2:
-            return nums.index(max(nums))
         l,r = 0,len(nums)-1
-        while l<=r:
-
-            m = (r+l)//2
-            #left neighbor greater
-            if m>0 and nums[m] < nums[m-1]:
-                r=m-1
-
-            #right neighbor greater
-            elif m<len(nums)-1 and nums[m] < nums[m+1]:
-                l=m+1
+        while l<r:
+            m=(l+r)//2
+            if nums[m]>nums[m+1]:
+                r=m
             else:
-                return m
-
-        return m
+                l=m+1
+        return r
