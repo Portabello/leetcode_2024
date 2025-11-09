@@ -34,7 +34,7 @@ Constraints:
 class Solution:
     def maximumGap(self, nums: List[int]) -> int:
         nums.sort()
-        maxgap = 0
+        max_gap = 0
         for i in range(1,len(nums)):
-            maxgap = max(maxgap, nums[i]-nums[i-1])
-        return maxgap
+            max_gap = max(max_gap, nums[i]-nums[i-1])
+        return max_gap
