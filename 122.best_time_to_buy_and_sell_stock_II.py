@@ -12,7 +12,6 @@ On each day, you may decide to buy and/or sell the stock. You can only hold at m
 Find and return the maximum profit you can achieve.
 
 
-
 Example 1:
 
 Input: prices = [7,1,5,3,6,4]
