@@ -60,33 +60,31 @@ Constraints:
 '''
 class Solution:
     def compareVersion(self, version1: str, version2: str) -> int:
-        version1 = version1.split('.')
-        version2 = version2.split('.')
+        v1 = version1.split(".")
+        v2 = version2.split(".")
 
-        def remove_leading_zeros(version):
-            for i,x in enumerate(version):
-                version[i] = str(int(x))
-            #return version
-        remove_leading_zeros(version1)
-        remove_leading_zeros(version2)
-        #print(version1)
-        #print(version2)
-        max_len = max(len(version1), len(version2))
-        def extend_version(version, max_len):
-            extend_by = max_len - len(version)
-            for i in range(extend_by):
-                version.append('0')
-        if len(version1)!=max_len:
-            extend_version(version1, max_len)
-        else:
-            extend_version(version2, max_len)
-        #print(version1)
-        #print(version2)
-        def compare(version1, version2):
-            for i in range(len(version1)):
-                if int(version1[i]) < int(version2[i]):
-                    return -1
-                elif int(version1[i]) > int(version2[i]):
-                    return 1
-            return 0
-        return compare(version1, version2)
+        def remove_leading_zeros(x):
+            r = []
+            for y in x:
+                t = y.lstrip('0')
+                if t=="":
+                    r.append('0')
+                else:
+                    r.append(t)
+            return r
+        v1 = remove_leading_zeros(v1)
+        v2 = remove_leading_zeros(v2)
+
+        if len(v1)<len(v2):
+            for i in range(len(v2)-len(v1)):
+                v1.append('0')
+        if len(v2)<len(v1):
+            for i in range(len(v1)-len(v2)):
+                v2.append('0')
+
+        for i in range(len(v1)):
+            if int(v1[i])<int(v2[i]):
+                return -1
+            if int(v1[i])>int(v2[i]):
+                return 1
+        return 0
