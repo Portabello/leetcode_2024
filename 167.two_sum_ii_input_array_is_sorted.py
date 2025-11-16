@@ -12,7 +12,7 @@ The tests are generated such that there is exactly one solution. You may not use
 
 Your solution must use only constant extra space.
 
- 
+
 
 Example 1:
 
@@ -29,7 +29,7 @@ Example 3:
 Input: numbers = [-1,0], target = -1
 Output: [1,2]
 Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].
- 
+
 
 Constraints:
 
@@ -41,12 +41,18 @@ The tests are generated such that there is exactly one solution.
 """
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        i,j = 0,len(numbers)-1
-        while i!=j:
-            sum = numbers[i]+numbers[j]
-            if sum==target:
-                return[i+1, j+1]
-            elif sum>target:
-                j=j-1
-            elif sum<target:
-                i=i+1
+        for i,x in enumerate(numbers):
+            t = target-x
+            l,r = 0,len(numbers)-1
+            while l<=r:
+                m=(l+r)//2
+                if numbers[m]==t and m!=i:
+                    if i<m:
+                        return [i+1,m+1]
+                    else:
+                        return [m+1,i+1]
+                if numbers[m]<t:
+                    l=m+1
+                else:
+                    r=m-1
+        
