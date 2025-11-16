@@ -61,27 +61,21 @@ Follow up:
 class BSTIterator:
 
     def __init__(self, root: Optional[TreeNode]):
-        #print(root)
-        self.root = root
-        self.in_order_array = []
-        def rc(root):
-            if root == None:
-                return
-            rc(root.left)
-            self.in_order_array.append(root.val)
-            rc(root.right)
-        rc(root)
-        #print(self.in_order_array)
-        self.ptr = 0
+        self.nodes = []
+        def recurse(node):
+            if node:
+                recurse(node.left)
+                self.nodes.append(node.val)
+                recurse(node.right)
+        recurse(root)
+
 
 
     def next(self) -> int:
-        self.ptr += 1
-        return self.in_order_array[self.ptr - 1]
+        return self.nodes.pop(0)
 
     def hasNext(self) -> bool:
-        #print(self.ptr, len(self.in_order_array))
-        if self.ptr < len(self.in_order_array):
+        if len(self.nodes)!=0:
             return True
         return False
 
