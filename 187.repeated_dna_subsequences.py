@@ -22,7 +22,6 @@ Example 2:
 Input: s = "AAAAAAAAAAAAA"
 Output: ["AAAAAAAAAA"]
 
-
 Constraints:
 
 1 <= s.length <= 105
