@@ -48,8 +48,15 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        #easy solution
-        #print(nums[len(nums)-k:])
-        #print(nums[:len(nums)-k])
-        k = k%len(nums)
-        nums[:] =  nums[len(nums)-k:]+nums[:len(nums)-k]
+        if k > len(nums):
+            t = k//len(nums)
+            r = k-(t*len(nums))
+        else:
+            r=k
+        if r==0:
+            return nums
+        def rotate_1():
+            t=nums.pop(-1)
+            nums.insert(0, t)
+        for x in range(r):
+            rotate_1()
