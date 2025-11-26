@@ -35,14 +35,15 @@ Constraints:
 '''
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        optimal = []
-        for i,x in enumerate(nums):
-            if i == 0:
-                optimal.append(x)
-            elif i == 1:
-                optimal.append(x)
-            elif len(optimal)>=2:
-                #optimal.append(max(x+optimal[i-2], optimal[i-1]))
-                optimal.append(max(x+max(optimal[0:i-1]), optimal[i-1]))
-        #print(optimal)
-        return max(optimal)
+        max_profit = [0]
+        def recurse(profit, last_house, left):
+            if len(left)==0:
+                max_profit[0]=max(max_profit[0], profit)
+                return
+            if last_house == 1:
+                recurse(profit, 0, left[1:])
+            else:
+                recurse(profit+left[0], 1, left[1:])
+                recurse(profit, 0, left[1:])
+        recurse(0, 0, nums)
+        return max_profit[0]
