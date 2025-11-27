@@ -41,20 +41,19 @@ Constraints:
 #         self.right = right
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        res = {}
-        def traverse(node, level):
-
-            if node == None:
+        hs = {}
+        def recurse(node, layer):
+            if not node:
                 return
-            else:
-                #print(level, node.val)
-                if level not in res:
-                    res[level] = node.val
-                traverse(node.right, level+1)
-                traverse(node.left, level+1)
-        traverse(root, 0)
-        #print(res)
+            hs[layer] = node.val
+            if not node.right and not node.left:
+                return
+            if node.left:
+                recurse(node.left, layer+1)
+            if node.right:
+                recurse(node.right, layer+1)
+        recurse(root, 1)
         ans = []
-        for x in res:
-            ans.append(res[x])
+        for x in hs:
+            ans.append(hs[x])
         return ans
