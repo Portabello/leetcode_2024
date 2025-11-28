@@ -40,26 +40,24 @@ Follow up: If you have figured out the O(n) solution, try coding another solutio
 '''
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        l,r = 0,0
-        min_subarray_len = None
-        cur_sum = 0
-        while l < len(nums):
-            #print(l,r,nums[l:r], sum(nums[l:r]), '?=', cur_sum)
-            #cur_sum = sum(nums[l:r])
-            if cur_sum < target:
-                if r >= len(nums):
-                    cur_sum -= nums[l]
-                    l+=1
-
-                else:
-
-                    r += 1
-                    if r <= len(nums):
-                        cur_sum += nums[r-1]
+        l,r=0,0
+        sum=nums[0]
+        if sum>=target:
+            return 1
+        min_size = float(inf)
+        while r<len(nums):
+            #print(l,r)
+            sum =0
+            for i in range(l,r+1):
+                sum+=nums[i]
+            #print('sum:',sum)
+            if sum>=target:
+                #print('found!', r-l+1)
+                min_size = min(min_size, r-l+1)
+            if sum<target:
+                r+=1
             else:
-                if min_subarray_len == None or r-l < min_subarray_len:
-                    #print('updating : ', l,r,r-l)
-                    min_subarray_len = r-l
-                cur_sum -= nums[l]
-                l += 1
-        return 0 if not min_subarray_len else min_subarray_len
+                l+=1
+        if min_size == float(inf):
+            return 0
+        return min_size
