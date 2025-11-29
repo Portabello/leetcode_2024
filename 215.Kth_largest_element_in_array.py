@@ -31,12 +31,11 @@ Constraints:
     -104 <= nums[i] <= 104
 
 '''
+import heapq
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        heap = []
-        for x in nums:
-            heapq.heappush(heap, -x)
-        ans = 0
-        for x in range(k):
-            ans = heapq.heappop(heap)
-        return -ans
+        max_heap = [-x for x in nums]
+        heapq.heapify(max_heap)
+        for i in range(k-1):
+            heapq.heappop(max_heap)
+        return -1*heapq.heappop(max_heap)
