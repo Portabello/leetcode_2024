@@ -49,21 +49,18 @@ Constraints:
 '''
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
-        res = []
-        def rc(arr, cur_sum):
-            remaining_sum = n - cur_sum
-            remaining_k = k - len(arr)
-            if remaining_sum == 0 and remaining_k == 0:
-                arr.sort()
-                if arr not in res:
-                    res.append(arr)
-                return
-            elif remaining_sum < 0 or remaining_k < 0:
-                return
-            for x in range(1,10):
-                if x not in arr:
-                    new_arr = arr + [x]
-                    rc(new_arr, cur_sum + x)
-        rc([], 0)
-        #print(res)
-        return res
+        ans = []
+        def recurse(num, stack, target):
+            if len(stack)==k:
+                if target == 0:
+                    ans.append(stack)
+                    return
+                else:
+                    return
+            for x in range(num+1,10):
+                if x<=target:
+                    recurse(x, stack+[x], target-x)
+                else:
+                    return
+        recurse(0, [], n)
+        return ans
