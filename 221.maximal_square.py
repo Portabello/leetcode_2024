@@ -33,7 +33,6 @@ Constraints:
     1 <= m, n <= 300
     matrix[i][j] is '0' or '1'.
 
-
 '''
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
